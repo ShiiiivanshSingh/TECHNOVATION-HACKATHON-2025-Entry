@@ -6,7 +6,7 @@
 
 <h2>🚀 Demo</h2>
 
-[Know Your Rghts](https://shiiiivanshsingh.github.io/TECHNOVATION-HACKATHON-2025-Entry/)
+[Know Your Rights](https://shiiiivanshsingh.github.io/TECHNOVATION-HACKATHON-2025-Entry/)
 
 
 
