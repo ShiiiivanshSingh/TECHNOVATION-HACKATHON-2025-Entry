@@ -14,6 +14,4 @@
 ![image](https://github.com/user-attachments/assets/34592922-fdc6-429c-ab2a-110770eb3b0c)
 ### Emergency Help
 ![image](https://github.com/user-attachments/assets/10222b70-4305-441d-a7d6-47751d620fa8)
-### Signup Page
-![image](https://github.com/user-attachments/assets/e1e479c8-2857-4829-b070-cd2b5d7883f0)
 
