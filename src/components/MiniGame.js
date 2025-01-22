@@ -51,7 +51,7 @@ const MiniGame = ({ darkMode }) => {
 
   const gameLoop = useCallback((timestamp) => {
     if (!lastTimeRef.current) lastTimeRef.current = timestamp;
-    const _deltaTime = timestamp - lastTimeRef.current; // Marked as intentionally unused
+    // const _deltaTime = timestamp - lastTimeRef.current; // Marked as intentionally unused
     lastTimeRef.current = timestamp;
 
     setGameState(prev => {

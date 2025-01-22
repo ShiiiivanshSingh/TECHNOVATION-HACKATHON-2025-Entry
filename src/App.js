@@ -6,15 +6,12 @@ import MiniGame from './components/MiniGame';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
-    // Check localStorage first, if not set, default to true for dark mode
     const savedTheme = localStorage.getItem('theme');
     return savedTheme ? JSON.parse(savedTheme) : true;
   });
 
   const [scrolled, setScrolled] = useState(false);
   const [showGames, setShowGames] = useState(false);
-  const [imageScale, setImageScale] = useState(1);
-  const [imagePosition, setImagePosition] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +29,6 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    // Save theme preference to localStorage
     localStorage.setItem('theme', JSON.stringify(darkMode));
   }, [darkMode]);
 
@@ -42,14 +38,12 @@ function App() {
       const maxScroll = 500; // Adjust this value to control zoom sensitivity
       const minScale = 1;    // Minimum scale (original size)
       const maxScale = 1.3;  // Maximum scale (30% larger)
-      
+
       // Calculate scale based on scroll position
-      const scale = Math.min(
-        maxScale,
-        minScale + (scrollPosition / maxScroll) * (maxScale - minScale)
-      );
-      
-      setImageScale(scale);
+      // const scale = Math.min(
+      //   maxScale,
+      //   minScale + (scrollPosition / maxScroll) * (maxScale - minScale)
+      // );
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -60,8 +54,7 @@ function App() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const maxScroll = 500;
-      const position = Math.max(0, Math.min(50, (scrollPosition / maxScroll) * 50));
-      setImagePosition(position);
+      // const position = Math.max(0, Math.min(50, (scrollPosition / maxScroll) * 50));
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -143,9 +136,7 @@ function App() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
-          className={`text-4xl ${
-            darkMode ? 'text-blue-400' : 'text-blue-600'
-          }`}
+          className={`text-4xl ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}
         >
           ↓
         </motion.div>
@@ -429,4 +420,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

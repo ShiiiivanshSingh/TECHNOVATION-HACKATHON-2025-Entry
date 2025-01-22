@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const GameSection = ({ darkMode, onClose }) => {
-  const [selectedGame, setSelectedGame] = useState(null);
-  const [quizAnswers, setQuizAnswers] = useState({});
-
   const games = [
     {
       id: 1,
@@ -48,10 +45,10 @@ const GameSection = ({ darkMode, onClose }) => {
   ];
 
   const handleAnswerSelect = (questionIndex, answerIndex) => {
-    setQuizAnswers({
-      ...quizAnswers,
-      [questionIndex]: answerIndex
-    });
+    // setQuizAnswers({
+    //   ...quizAnswers,
+    //   [questionIndex]: answerIndex
+    // });
   };
 
   return (
