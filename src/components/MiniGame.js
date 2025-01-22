@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const GAME_WIDTH = 400;
@@ -35,13 +35,6 @@ const MiniGame = ({ darkMode }) => {
     });
   };
 
-  const handleJump = (e) => {
-    e.preventDefault();
-    if (gameState.isPlaying && !gameState.gameOver) {
-      setGameState(prev => ({ ...prev, velocity: JUMP_FORCE }));
-    }
-  };
-
   const startGame = () => {
     resetGame();
     setGameState(prev => ({ ...prev, isPlaying: true }));
@@ -56,9 +49,9 @@ const MiniGame = ({ darkMode }) => {
     };
   };
 
-  const gameLoop = (timestamp) => {
+  const gameLoop = useCallback((timestamp) => {
     if (!lastTimeRef.current) lastTimeRef.current = timestamp;
-    const deltaTime = timestamp - lastTimeRef.current;
+    const _deltaTime = timestamp - lastTimeRef.current; // Marked as intentionally unused
     lastTimeRef.current = timestamp;
 
     setGameState(prev => {
@@ -115,14 +108,14 @@ const MiniGame = ({ darkMode }) => {
     });
 
     gameLoopRef.current = requestAnimationFrame(gameLoop);
-  };
+  }, []);
 
   useEffect(() => {
     if (gameState.isPlaying && !gameState.gameOver) {
       gameLoopRef.current = requestAnimationFrame(gameLoop);
     }
     return () => cancelAnimationFrame(gameLoopRef.current);
-  }, [gameState.isPlaying, gameState.gameOver]);
+  }, [gameState.isPlaying, gameState.gameOver, gameLoop]);
 
   // Keyboard controls
   useEffect(() => {
