@@ -6,7 +6,7 @@ const GAME_HEIGHT = 600;
 const BIRD_SIZE = 30;
 const PIPE_WIDTH = 60;
 const PIPE_GAP = 160;
-const GRAVITY = 0.6;
+const GRAVITY = 0.60;
 const JUMP_FORCE = -10;
 
 const MiniGame = ({ darkMode }) => {
