@@ -6,12 +6,15 @@
 
 <h2>🚀 Demo</h2>
 
-[Know Your Rights](https://shiiiivanshsingh.github.io/TECHNOVATION-HACKATHON-2025-Entry/)
-
-
+[LegalChamps.]([https://shiiiivanshsingh.github.io/TECHNOVATION-HACKATHON-2025-Entry/](https://legalchamps.vercel.app))
 
 ### Landing Page
-![image](https://github.com/user-attachments/assets/34592922-fdc6-429c-ab2a-110770eb3b0c)
-### Emergency Help
-![image](https://github.com/user-attachments/assets/10222b70-4305-441d-a7d6-47751d620fa8)
+![Screenshot 2025-01-23 000404](https://github.com/user-attachments/assets/ef66e6e7-b625-4d18-9be7-dec73b8e9437)
 
+
+### More Features
+![Screenshot 2025-01-23 000439](https://github.com/user-attachments/assets/8fd992a9-d406-44ea-bd70-c1722132a537)
+
+
+### Flappy Bird Game
+![Screenshot 2025-01-23 000505](https://github.com/user-attachments/assets/69da2eb7-0181-4368-9e93-93b3f9adff4a)
