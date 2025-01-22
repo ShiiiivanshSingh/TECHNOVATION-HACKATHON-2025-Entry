@@ -6,7 +6,8 @@
 
 <h2>🚀 Demo</h2>
 
-[LegalChamps.]([https://shiiiivanshsingh.github.io/TECHNOVATION-HACKATHON-2025-Entry/](https://legalchamps.vercel.app))
+[LegalChamps.](https://legalchamps.vercel.app](https://legalchamps.vercel.app)) <br><br>
+[this build is not yet optimized for smaller screens. thank you!]
 
 ### Landing Page
 ![Screenshot 2025-01-23 000404](https://github.com/user-attachments/assets/ef66e6e7-b625-4d18-9be7-dec73b8e9437)
