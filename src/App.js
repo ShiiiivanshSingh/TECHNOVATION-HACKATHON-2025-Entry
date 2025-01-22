@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import GameSection from './components/GameSection';
 import Header from './components/Header';
 import MiniGame from './components/MiniGame';
+import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe } from 'react-icons/fa';
+import { translations } from './translations';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -11,7 +13,14 @@ function App() {
   });
 
   const [scrolled, setScrolled] = useState(false);
-  const [showGames, setShowGames] = useState(false);
+  const [showGames, setShowGames] = useState(() => {
+    const saved = localStorage.getItem('showGames');
+    return saved ? JSON.parse(saved) : false;
+  });
+  const [showEmergencyHelp, setShowEmergencyHelp] = useState(() => {
+    const saved = localStorage.getItem('showEmergencyHelp');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +70,16 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleGameClose = () => {
+    setShowGames(false);
+    localStorage.setItem('showGames', 'false');
+  };
+
+  const handleEmergencyClose = () => {
+    setShowEmergencyHelp(false);
+    localStorage.setItem('showEmergencyHelp', 'false');
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? 'dark:bg-gray-900' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
@@ -74,48 +93,53 @@ function App() {
           >
             <span className="text-blue-600 text-xl font-semibold mb-4 block">Welcome to Legal Champs.</span>
             <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'} flex flex-col gap-4`}>
-  Making Legal Rights
-  <span className="text-blue-600">Fun & Easy</span>
-</h1>
+              Making Legal Rights
+              <span className="text-blue-600">Fun & Easy</span>
+            </h1>
             <p className={`text-xl mb-8 max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               Join thousands of kids across India discovering their rights through exciting adventures, 
               games, and interactive stories. Start your journey to become a Legal Champion today!
             </p>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowGames(true)}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+            
+            {/* Start Playing Button */}
+            {!showGames && (
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowGames(true)}
+                className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+              >
+                Start Playing Now
+              </motion.button>
+            )}
+
+            {/* Stats Section */}
+            <motion.div 
+              className="mt-16"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
             >
-              Start Playing Now
-            </motion.button>
-          </motion.div>
-          
-          <motion.div 
-            className="mt-16"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
-              alt="Children learning together"
-              className="rounded-2xl shadow-2xl"
-            />
-            <div className="grid grid-cols-3 gap-8 mt-8">
-              <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                <div className="text-3xl font-bold text-blue-600">10k+</div>
-                <div>Active Learners</div>
+              <img 
+                src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+                alt="Children learning together"
+                className="rounded-2xl shadow-2xl"
+              />
+              <div className="grid grid-cols-3 gap-8 mt-8">
+                <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <div className="text-3xl font-bold text-blue-600">10k+</div>
+                  <div>Active Learners</div>
+                </div>
+                <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <div className="text-3xl font-bold text-blue-600">50+</div>
+                  <div>Interactive Games</div>
+                </div>
+                <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <div className="text-3xl font-bold text-blue-600">95%</div>
+                  <div>Happy Learners</div>
+                </div>
               </div>
-              <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                <div className="text-3xl font-bold text-blue-600">50+</div>
-                <div>Interactive Games</div>
-              </div>
-              <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                <div className="text-3xl font-bold text-blue-600">95%</div>
-                <div>Happy Learners</div>
-              </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </main>
@@ -357,80 +381,175 @@ function App() {
         </div>
       </section>
 
-
-
-
-    
-
-
-
-
-
-
-      {/* Call to Action */}
-      <section className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-blue-50'}`}>
+      {/* Call to Action - Original position */}
+      <section className="py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className={`text-3xl md:text-4xl font-bold mb-8 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-            Ready to Become a Legal Champion? 🚀
-          </h2>
-          <p className={`text-xl mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Join thousands of kids already learning about their rights through fun!
-          </p>
           <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowGames(true)}
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
-            >
-              Start Your Adventure Now!
-            </motion.button>
-          
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              setShowGames(true);
+              localStorage.setItem('showGames', 'true');
+            }}
+            className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+          >
+            Start Your Adventure Now!
+          </motion.button>
         </div>
       </section>
 
-      {showGames && <GameSection darkMode={darkMode} onClose={() => setShowGames(false)} />}
+      {/* Emergency Help Button with Close Button */}
+      <div className="fixed left-8 bottom-8 flex items-center gap-2 z-50">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => {
+            setShowEmergencyHelp(true);
+            localStorage.setItem('showEmergencyHelp', 'true');
+          }}
+          className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2"
+        >
+          <FaExclamationTriangle />
+          <span className="font-semibold">Emergency Help</span>
+        </motion.button>
+        {showEmergencyHelp && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={handleEmergencyClose}
+            className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg"
+          >
+            <FaTimes className="text-xl" />
+          </motion.button>
+        )}
+      </div>
+
+      {/* Game Section Modal with Close Button */}
+      {showGames && (
+        <>
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={handleGameClose}
+            className="fixed right-8 top-24 bg-red-500 hover:bg-red-600 text-white p-2 rounded-full shadow-lg z-50"
+          >
+            <FaTimes className="text-xl" />
+          </motion.button>
+          <GameSection darkMode={darkMode} onClose={handleGameClose} />
+        </>
+      )}
+
+      {/* Emergency Help Modal */}
+      <AnimatePresence>
+        {showEmergencyHelp && (
+          <EmergencyHelp darkMode={darkMode} onClose={handleEmergencyClose} />
+        )}
+      </AnimatePresence>
 
       <footer className={`border-t ${darkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'}`}>
         <div className="container mx-auto px-6 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="transform transition-transform duration-300 hover:scale-105">
               <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>About Us</h3>
-              <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                Discover Your Rights Through Play! 🎮 [SAPP-1176]
+              <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300 hover:text-blue-500`}>
+                Discover Your Rights Through Play! <br/> [TEAM ID:SAPP-1176]
               </p>
             </div>
-            <div>
-              <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Quick Links</h3>
-              <ul className={`space-y-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                <li><a href="#" className="hover:text-blue-600">Home</a></li>
-                <li><a href="#" className="hover:text-blue-600">About</a></li>
-                <li><a href="#" className="hover:text-blue-600">Services</a></li>
-                <li><a href="#" className="hover:text-blue-600">Contact</a></li>
-              </ul>
-            </div>
-            <div>
+            <div className="transform transition-transform duration-300 hover:scale-105">
               <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Contact</h3>
               <ul className={`space-y-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                <li>Email: dial1098@childlineindia.org.in</li>
-                
-                  <li>Phone: +91-22-68251098</li>
-                
-                
-                <li>Address: 27A, B- wing, G D Ambekar Road, Wadala East,
+                <li className="transition-colors duration-300 hover:text-blue-500">Email: dial1098@childlineindia.org.in</li>
+                <li className="transition-colors duration-300 hover:text-blue-500">Phone: +91-22-68251098</li>
+                <li className="transition-colors duration-300 hover:text-blue-500">Address: 27A, B- wing, G D Ambekar Road, Wadala East,
 Mumbai, Maharashtra 400031</li>
               </ul>
             </div>
-            <div>
+            <div className="transform transition-transform duration-300 hover:scale-105">
               <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Follow Us</h3>
-              <div className="flex space-x-4">
-                <a href="https://x.com/de_mirage_fan" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Twitter</a>
-                <a href="https://www.linkedin.com/in/shivansh-pratap-singh-23b3b92b1" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>LinkedIn</a>
-                <a href="https://github.com/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>GitHub</a>
+              <div className="flex space-x-6">
+                <a 
+                  href="https://x.com/de_mirage_fan" 
+                  className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaTwitter className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                  <span>Twitter</span>
+                </a>
+                <a 
+                  href="https://www.linkedin.com/in/shivansh-pratap-singh-23b3b92b1" 
+                  className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                  <span>LinkedIn</span>
+                </a>
+                <a 
+                  href="https://github.com/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry" 
+                  className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                  <span>GitHub</span>
+                </a>
               </div>
             </div>
           </div>
-          <div className={`text-center mt-8 pt-8 border-t ${darkMode ? 'border-gray-800 text-gray-400' : 'border-gray-200 text-gray-600'}`}>
-            © 2024 Legal Chmaps. All rights reserved.
+
+          <div className={`mt-8 pt-8 border-t ${darkMode ? 'border-gray-800' : 'border-gray-200'}`}>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className={`text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300 hover:text-blue-500`}>
+                © 2024 Legal ChaMps. All rights reserved.
+              </div>
+              <div>
+                <ul className={`flex space-x-6 flex-wrap ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <li>
+                    <a 
+                      href="https://ncpcr.gov.in" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-blue-600 flex items-center gap-1 transition-all duration-300 hover:scale-110"
+                    >
+                      NCPCR <FaExternalLinkAlt className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://wcd.nic.in" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-blue-600 flex items-center gap-1 transition-all duration-300 hover:scale-110"
+                    >
+                      WCD Ministry <FaExternalLinkAlt className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://cybercrime.gov.in" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-blue-600 flex items-center gap-1 transition-all duration-300 hover:scale-110"
+                    >
+                      Cyber Crime Portal <FaExternalLinkAlt className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://www.india.gov.in/topics/social-development/children" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-blue-600 flex items-center gap-1 transition-all duration-300 hover:scale-110"
+                    >
+                      Child Portal <FaExternalLinkAlt className="text-xs transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
@@ -439,5 +558,160 @@ Mumbai, Maharashtra 400031</li>
     </div>
   );
 }
+
+const EmergencyHelp = ({ darkMode, onClose }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/50 backdrop-blur-sm"
+    >
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className={`w-full max-w-4xl rounded-xl shadow-2xl ${darkMode ? 'bg-gray-900' : 'bg-white'} p-6`}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h2 className={`text-2xl font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+              <FaExclamationTriangle className="text-red-500" />
+              Emergency Help & Resources
+            </h2>
+            <button
+              onClick={onClose}
+              className={`p-2 rounded-lg text-white ${darkMode ? 'bg-gray-800 hover:bg-gray-700' : 'bg-gray-100 hover:bg-gray-200'}`}
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Immediate Help Section */}
+            <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+                <FaPhone className="text-red-500" />
+                Immediate Help
+              </h3>
+              <div className="space-y-4">
+                <EmergencyButton
+                  number="1098"
+                  name="CHILDLINE"
+                  description="24/7 emergency helpline for children"
+                  color="red"
+                  darkMode={darkMode}
+                />
+                <EmergencyButton
+                  number="100"
+                  name="Police"
+                  description="Emergency police assistance"
+                  color="blue"
+                  darkMode={darkMode}
+                />
+                <EmergencyButton
+                  number="1091"
+                  name="Women Helpline"
+                  description="24/7 women's safety helpline"
+                  color="purple"
+                  darkMode={darkMode}
+                />
+              </div>
+            </div>
+
+            {/* Government Resources */}
+            <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+                <FaShieldAlt className="text-blue-500" />
+                Government Support
+              </h3>
+              <div className="space-y-4">
+                <ResourceLink
+                  title="National Commission for Protection of Child Rights"
+                  description="File complaints and seek help"
+                  link="https://ncpcr.gov.in"
+                  darkMode={darkMode}
+                />
+                <ResourceLink
+                  title="Child Welfare Committee"
+                  description="Find your local CWC"
+                  link="https://wcd.nic.in/child-welfare-committees"
+                  darkMode={darkMode}
+                />
+              </div>
+            </div>
+
+            {/* Counseling Services */}
+            <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white">
+                <FaHeadset className="text-green-500" />
+                Free Counseling
+              </h3>
+              <div className="space-y-4">
+                <ResourceLink
+                  title="iCall Helpline"
+                  description="Professional counseling support"
+                  link="https://icallhelpline.org"
+                  darkMode={darkMode}
+                />
+                <ResourceLink
+                  title="School Counselors Directory"
+                  description="Find counselors in your school"
+                  link="#"
+                  darkMode={darkMode}
+                />
+              </div>
+            </div>
+
+            {/* Safety Tips */}
+            <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+              <h3 className="text-xl font-bold mb-4 text-white">
+                Important Safety Tips
+              </h3>
+              <ul className="list-disc pl-5 space-y-2 text-gray-300">
+                <li>Save emergency numbers on your phone</li>
+                <li>Tell a trusted adult if you feel unsafe</li>
+                <li>Keep evidence of any harassment</li>
+                <li>Don't share personal information online</li>
+                <li>Trust your instincts - if something feels wrong, seek help</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+const EmergencyButton = ({ number, name, description, color, darkMode }) => (
+  <button
+    onClick={() => window.location.href = `tel:${number}`}
+    className={`w-full p-4 rounded-lg ${darkMode ? `bg-${color}-900 hover:bg-${color}-800` : `bg-${color}-100 hover:bg-${color}-200`} transition-colors`}
+  >
+    <div className="flex items-center gap-4">
+      <div className={`w-12 h-12 rounded-full bg-${color}-500 text-white flex items-center justify-center text-xl`}>
+        <FaPhone />
+      </div>
+      <div className="text-left">
+        <div className={`font-bold text-lg ${darkMode ? 'text-white' : `text-${color}-700`}`}>{number}</div>
+        <div className={`font-medium ${darkMode ? 'text-gray-300' : `text-${color}-600`}`}>{name}</div>
+        <div className={`text-sm ${darkMode ? 'text-gray-400' : `text-${color}-500`}`}>{description}</div>
+      </div>
+    </div>
+  </button>
+);
+
+const ResourceLink = ({ title, description, link, darkMode }) => (
+  <a
+    href={link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`block p-4 rounded-lg ${
+      darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-white hover:bg-gray-50'
+    } transition-colors`}
+  >
+    <div className={`font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>{title}</div>
+    <div className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{description}</div>
+  </a>
+);
 
 export default App;
