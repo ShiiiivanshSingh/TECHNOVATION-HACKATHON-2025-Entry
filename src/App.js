@@ -73,8 +73,8 @@ function App() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-blue-600 text-xl font-semibold mb-4 block">Welcome to Legal Champs.</span>
-           <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-  Making Legal Rights<br />
+            <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'} flex flex-col gap-4`}>
+  Making Legal Rights
   <span className="text-blue-600">Fun & Easy</span>
 </h1>
             <p className={`text-xl mb-8 max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -357,6 +357,16 @@ function App() {
         </div>
       </section>
 
+
+
+
+    
+
+
+
+
+
+
       {/* Call to Action */}
       <section className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-blue-50'}`}>
         <div className="container mx-auto px-6 text-center">
@@ -366,9 +376,15 @@ function App() {
           <p className={`text-xl mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
             Join thousands of kids already learning about their rights through fun!
           </p>
-          <button className="bg-blue-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all shadow-lg">
-            Start Your Adventure Now!
-          </button>
+          <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowGames(true)}
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+            >
+              Start Your Adventure Now!
+            </motion.button>
+          
         </div>
       </section>
 
