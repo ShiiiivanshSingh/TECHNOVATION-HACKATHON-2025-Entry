@@ -75,7 +75,7 @@ function App() {
             <span className="text-blue-600 text-xl font-semibold mb-4 block">Welcome to LegalChamps</span>
             <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
               Making Legal Rights
-              <span className="text-blue-600"> Fun & Easy</span>
+              <br><span className="text-blue-600"> Fun & Easy</span>
             </h1>
             <p className={`text-xl mb-8 max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               Join thousands of kids across India discovering their rights through exciting adventures, 
