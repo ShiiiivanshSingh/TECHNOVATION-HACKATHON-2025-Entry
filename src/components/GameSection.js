@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const GameSection = ({ darkMode, onClose }) => {
+  const [selectedGame, setSelectedGame] = useState(null);
+  const [quizAnswers, setQuizAnswers] = useState({});
+
   const games = [
     {
       id: 1,
@@ -45,10 +48,10 @@ const GameSection = ({ darkMode, onClose }) => {
   ];
 
   const handleAnswerSelect = (questionIndex, answerIndex) => {
-    // setQuizAnswers({
-    //   ...quizAnswers,
-    //   [questionIndex]: answerIndex
-    // });
+    setQuizAnswers({
+      ...quizAnswers,
+      [questionIndex]: answerIndex
+    });
   };
 
   return (
@@ -71,9 +74,7 @@ const GameSection = ({ darkMode, onClose }) => {
               <motion.div
                 key={game.id}
                 whileHover={{ scale: 1.05 }}
-                className={`p-6 rounded-xl cursor-pointer ${
-                  darkMode ? 'bg-gray-800' : 'bg-gray-50'
-                }`}
+                className={`p-6 rounded-xl cursor-pointer ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}
                 onClick={() => setSelectedGame(game)}
               >
                 <h3 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
