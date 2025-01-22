@@ -6,7 +6,7 @@
 
 <h2>🚀 Demo</h2>
 
-[Know Your Rights](https://shiiiivanshsingh.github.io/TECHNOVATION-HACKATHON-2025-Entry/)
+[for demo clone this repo and use live server as this build is now discontiued! thanks.]
 
 
 
