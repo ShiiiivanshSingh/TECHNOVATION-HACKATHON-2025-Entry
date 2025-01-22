@@ -72,7 +72,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="text-blue-600 text-xl font-semibold mb-4 block">Welcome to LegalChamps</span>
+            <span className="text-blue-600 text-xl font-semibold mb-4 block">Welcome to Legal Champs.</span>
             <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
               Making Legal Rights
               <br><span className="text-blue-600"> Fun & Easy</span>
@@ -395,22 +395,26 @@ function App() {
             <div>
               <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Contact</h3>
               <ul className={`space-y-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                <li>Email: info@example.com</li>
-                <li>Phone: (123) 456-7890</li>
-                <li>Address: 123 Web Street</li>
+                <li>Email: dial1098@childlineindia.org.in</li>
+                
+                  <li>Phone: +91-22-68251098</li>
+                
+                
+                <li>Address: 27A, B- wing, G D Ambekar Road, Wadala East,
+Mumbai, Maharashtra 400031</li>
               </ul>
             </div>
             <div>
               <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Follow Us</h3>
               <div className="flex space-x-4">
-                <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Twitter</a>
-                <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>LinkedIn</a>
-                <a href="#" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>GitHub</a>
+                <a href="https://x.com/de_mirage_fan" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>Twitter</a>
+                <a href="https://www.linkedin.com/in/shivansh-pratap-singh-23b3b92b1" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>LinkedIn</a>
+                <a href="https://github.com/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry" className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>GitHub</a>
               </div>
             </div>
           </div>
           <div className={`text-center mt-8 pt-8 border-t ${darkMode ? 'border-gray-800 text-gray-400' : 'border-gray-200 text-gray-600'}`}>
-            © 2024 Your Company. All rights reserved.
+            © 2024 Legal Chmaps. All rights reserved.
           </div>
         </div>
       </footer>
