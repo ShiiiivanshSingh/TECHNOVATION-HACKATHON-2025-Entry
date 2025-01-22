@@ -73,10 +73,10 @@ function App() {
             transition={{ duration: 0.5 }}
           >
             <span className="text-blue-600 text-xl font-semibold mb-4 block">Welcome to Legal Champs.</span>
-            <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-              Making Legal Rights
-              <br><span className="text-blue-600"> Fun & Easy</span>
-            </h1>
+           <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+  Making Legal Rights<br />
+  <span className="text-blue-600">Fun & Easy</span>
+</h1>
             <p className={`text-xl mb-8 max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               Join thousands of kids across India discovering their rights through exciting adventures, 
               games, and interactive stories. Start your journey to become a Legal Champion today!
@@ -380,7 +380,7 @@ function App() {
             <div>
               <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>About Us</h3>
               <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                Creating amazing web experiences with modern technologies.
+                Discover Your Rights Through Play! 🎮 [SAPP-1176]
               </p>
             </div>
             <div>
