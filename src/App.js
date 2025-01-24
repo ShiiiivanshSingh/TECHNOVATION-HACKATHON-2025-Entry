@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 100;
+      const isScrolled = window.scrollY > 0;
       setScrolled(isScrolled);
     };
 
@@ -120,24 +120,45 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <img 
+              {/* <img 
                 src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
                 alt="Children learning together"
                 className="rounded-2xl shadow-2xl"
-              />
+              /> */}
               <div className="grid grid-cols-3 gap-8 mt-8">
-                <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  <div className="text-3xl font-bold text-blue-600">10k+</div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
+                >
+                  <div className="text-3xl font-bold text-blue-600">
+                    <AnimatedCounter value={10} duration={1} />k+
+                  </div>
                   <div>Active Learners</div>
-                </div>
-                <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  <div className="text-3xl font-bold text-blue-600">50+</div>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
+                >
+                  <div className="text-3xl font-bold text-blue-600">
+                    <AnimatedCounter value={50} duration={1} />+
+                  </div>
                   <div>Interactive Games</div>
-                </div>
-                <div className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  <div className="text-3xl font-bold text-blue-600">95%</div>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
+                >
+                  <div className="text-3xl font-bold text-blue-600">
+                    <AnimatedCounter value={95} duration={1} />%
+                  </div>
                   <div>Happy Learners</div>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </motion.div>
@@ -148,13 +169,18 @@ function App() {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: scrolled ? 0 : 1 }}
-        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 text-center z-40"
+        transition={{ 
+          delay: 3,
+          duration: 1.2,        // Longer fade in duration
+          opacity: { duration: 0.15 }  // Even shorter fade out duration
+        }}
+        className="fixed bottom-1 left-1/2 transform -translate-x-1/2 text-center z-40"
       >
         <p className={`text-lg font-semibold mb-2 ${
           darkMode 
-            ? 'text-white bg-gray-800/80 px-4 py-2 rounded-full' 
-            : 'text-gray-800 bg-white/80 px-4 py-2 rounded-full'
-        } backdrop-blur-sm`}>
+            ? 'text-white bg-gray-800/60 px-4 py-2 rounded-full backdrop-blur-sm' 
+            : 'text-gray-800 bg-white/60 px-4 py-2 rounded-full backdrop-blur-sm'
+        }`}>
           Scroll to Explore
         </p>
         <motion.div
@@ -185,12 +211,12 @@ function App() {
               className={`rounded-xl p-6 ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}
             >
               <img 
-                src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Adventure Mode"
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
               <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                Adventure Mode 🎮
+                Adventure Mode 
               </h3>
               <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 Embark on exciting quests to learn about your rights while helping others!
@@ -301,10 +327,10 @@ function App() {
                 <div className="w-5/12">
                   <div className={`p-6 rounded-xl ${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
                     <h3 className={`text-xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
-                      Level 3: Community Leader 👥
+                      Level 3: Super Pro! 👥
                     </h3>
                     <p className={`${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                      Help others learn their rights and become a community champion!
+                      Become a community champion!
                     </p>
                   </div>
                 </div>
@@ -503,7 +529,7 @@ Mumbai, Maharashtra 400031</li>
           <div className={`mt-8 pt-8 border-t ${darkMode ? 'border-gray-800' : 'border-gray-200'}`}>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div className={`text-center ${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300 hover:text-blue-500`}>
-                © 2024 Legal ChaMps. All rights reserved.
+                 Legal Champs. Team ID: SAPP-1176
               </div>
               <div>
                 <ul className={`flex space-x-6 flex-wrap ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -713,5 +739,31 @@ const ResourceLink = ({ title, description, link, darkMode }) => (
     <div className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>{description}</div>
   </a>
 );
+
+const AnimatedCounter = ({ value, duration = 1.5 }) => {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    let startTime;
+    let animationFrame;
+    
+    const animate = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = (timestamp - startTime) / (duration * 1000);
+      
+      if (progress < 1) {
+        setCount(Math.min(Math.floor(value * progress), value));
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        setCount(value);
+      }
+    };
+    
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [value, duration]);
+  
+  return <>{count}</>;
+};
 
 export default App;
