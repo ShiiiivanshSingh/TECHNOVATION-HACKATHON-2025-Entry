@@ -4,6 +4,193 @@ import { FaTrophy, FaStar, FaMedal, FaChartLine, FaUndo } from 'react-icons/fa';
 import confetti from 'canvas-confetti';
 import CourtroomSimulator from './CourtroomSimulator';
 
+const QUESTIONS_PER_TURN = 5;
+
+const QUESTIONS = {
+  basic: [
+    {
+      question: "What is the legal age for voting in India?",
+      options: ["16 years", "18 years", "21 years", "25 years"],
+      correct: 1,
+      explanation: "In India, citizens can vote when they turn 18 years old."
+    },
+    {
+      question: "Every child has the right to...",
+      options: ["Free education until age 14", "Work in factories", "Skip school", "Pay for primary education"],
+      correct: 0,
+      explanation: "Under RTE Act, every child has the right to free education until age 14."
+    },
+    {
+      question: "What should you do if you witness bullying?",
+      options: ["Join in", "Ignore it", "Tell a teacher or trusted adult", "Film it for social media"],
+      correct: 2,
+      explanation: "Always report bullying to a trusted adult who can help stop it."
+    },
+    {
+      question: "Which number should you call for child emergency services?",
+      options: ["911", "100", "1098", "112"],
+      correct: 2,
+      explanation: "1098 is CHILDLINE, India's 24/7 emergency helpline for children."
+    },
+    {
+      question: "What is the minimum age for creating a social media account?",
+      options: ["10 years", "13 years", "16 years", "18 years"],
+      correct: 1,
+      explanation: "Most social media platforms require users to be at least 13 years old."
+    },
+    {
+      question: "Which of these is a child's right?",
+      options: ["Work in factories", "Safe environment to grow", "Skip school", "Stay up late"],
+      correct: 1,
+      explanation: "Every child has the right to grow up in a safe environment."
+    },
+    {
+      question: "What should you do if a stranger online asks for personal information?",
+      options: ["Share it", "Tell parents/guardian", "Keep it secret", "Make up fake info"],
+      correct: 1,
+      explanation: "Always tell a trusted adult if someone online asks for personal information."
+    }
+  ],
+  intermediate: [
+    {
+      question: "What is the Right to Education Act?",
+      options: [
+        "Law making education free and compulsory for ages 6-14",
+        "Law about college education",
+        "Rules for private schools only",
+        "Guidelines for teachers"
+      ],
+      correct: 0,
+      explanation: "RTE Act makes education a fundamental right for children aged 6-14 years."
+    },
+    {
+      question: "What is POCSO Act?",
+      options: [
+        "Protection of Children from Social Media",
+        "Protection of Children from School Offences",
+        "Protection of Children from Sexual Offences",
+        "Protection of Children from Society"
+      ],
+      correct: 2,
+      explanation: "POCSO Act protects children from sexual abuse and exploitation."
+    },
+    {
+      question: "Which right allows you to express your views freely?",
+      options: ["Right to Property", "Right to Freedom of Expression", "Right to Vote", "Right to Travel"],
+      correct: 1,
+      explanation: "Freedom of Expression is a fundamental right in India."
+    },
+    {
+      question: "What is the legal working age in India?",
+      options: ["12 years", "14 years", "16 years", "18 years"],
+      correct: 1,
+      explanation: "Children below 14 years cannot work in most occupations in India."
+    },
+    {
+      question: "What should you do if you face cyberbullying?",
+      options: [
+        "Delete your account",
+        "Bully them back",
+        "Keep it to yourself",
+        "Tell parents/teachers and save evidence"
+      ],
+      correct: 3,
+      explanation: "Always report cyberbullying and save evidence like screenshots."
+    },
+    {
+      question: "Which organization protects child rights in India?",
+      options: ["NCPCR", "UNESCO", "WHO", "UNICEF"],
+      correct: 0,
+      explanation: "National Commission for Protection of Child Rights (NCPCR) protects children's rights in India."
+    },
+    {
+      question: "What is the Juvenile Justice Act about?",
+      options: [
+        "School rules",
+        "Care and protection of children",
+        "Children's games",
+        "Child education"
+      ],
+      correct: 1,
+      explanation: "The JJ Act provides for proper care, protection, and treatment of children."
+    }
+  ],
+  advanced: [
+    {
+      question: "What is the punishment for child labor under Indian law?",
+      options: [
+        "No punishment",
+        "Fine only",
+        "Imprisonment up to 1 year and/or fine",
+        "Warning only"
+      ],
+      correct: 2,
+      explanation: "Employment of children below 14 years can result in imprisonment and fine."
+    },
+    {
+      question: "Which article of Indian Constitution guarantees free education?",
+      options: ["Article 21", "Article 21A", "Article 22", "Article 23"],
+      correct: 1,
+      explanation: "Article 21A makes free education a fundamental right."
+    },
+    {
+      question: "What is 'Gillick Competence'?",
+      options: [
+        "Sports rule",
+        "Child's capacity to make decisions",
+        "School grade",
+        "Medical term"
+      ],
+      correct: 1,
+      explanation: "Gillick Competence refers to a child's capacity to make their own decisions."
+    },
+    {
+      question: "Which UN convention protects child rights globally?",
+      options: [
+        "UNCRC",
+        "UNHRC",
+        "UNICEF",
+        "UNESCO"
+      ],
+      correct: 0,
+      explanation: "The UN Convention on the Rights of the Child (UNCRC) protects children's rights globally."
+    },
+    {
+      question: "What is the role of Child Welfare Committee (CWC)?",
+      options: [
+        "Organize sports",
+        "Manage schools",
+        "Protect child rights and rehabilitation",
+        "Provide meals"
+      ],
+      correct: 2,
+      explanation: "CWC is responsible for protecting child rights and rehabilitation of children in need."
+    },
+    {
+      question: "What is the maximum punishment under POCSO Act?",
+      options: [
+        "1 year",
+        "5 years",
+        "10 years",
+        "Life imprisonment"
+      ],
+      correct: 3,
+      explanation: "POCSO Act provides for life imprisonment for serious offenses against children."
+    },
+    {
+      question: "Which body monitors RTE implementation?",
+      options: [
+        "Supreme Court",
+        "State Commission",
+        "NCPCR",
+        "Local Police"
+      ],
+      correct: 2,
+      explanation: "NCPCR monitors the implementation of Right to Education Act."
+    }
+  ]
+};
+
 const GameSection = ({ darkMode, onClose }) => {
   const [selectedGame, setSelectedGame] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
