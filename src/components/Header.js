@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Header = ({ darkMode, setDarkMode }) => {
+const Header = ({ darkMode, setDarkMode, onCommunityClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuVariants = {
@@ -28,7 +28,8 @@ const Header = ({ darkMode, setDarkMode }) => {
               {['Home', 'Games', 'Learn', 'Community'].map((item, index) => (
                 <motion.a
                   key={item}
-                  href="#"
+                  onClick={item === 'Community' ? onCommunityClick : undefined}
+                  style={{ cursor: item === 'Community' ? 'pointer' : 'default' }}
                   whileHover={{ scale: 1.1 }}
                   className={`hover:text-blue-600 transition-colors ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                   initial={{ opacity: 0, y: -20 }}
@@ -78,7 +79,8 @@ const Header = ({ darkMode, setDarkMode }) => {
                 {['Home', 'Games', 'Learn', 'Community'].map((item) => (
                   <a
                     key={item}
-                    href="#"
+                    onClick={item === 'Community' ? onCommunityClick : undefined}
+                    style={{ cursor: item === 'Community' ? 'pointer' : 'default' }}
                     className={`text-lg ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
                   >
                     {item}

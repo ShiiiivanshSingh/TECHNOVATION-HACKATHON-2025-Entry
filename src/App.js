@@ -5,6 +5,7 @@ import Header from './components/Header';
 import MiniGame from './components/MiniGame';
 import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe } from 'react-icons/fa';
 import { translations } from './translations';
+import CommunityForum from './components/CommunityForum';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -13,14 +14,12 @@ function App() {
   });
 
   const [scrolled, setScrolled] = useState(false);
-  const [showGames, setShowGames] = useState(() => {
-    const saved = localStorage.getItem('showGames');
-    return saved ? JSON.parse(saved) : false;
-  });
+  const [showGameSections, setShowGameSections] = useState(false);
   const [showEmergencyHelp, setShowEmergencyHelp] = useState(() => {
     const saved = localStorage.getItem('showEmergencyHelp');
     return saved ? JSON.parse(saved) : false;
   });
+  const [showCommunity, setShowCommunity] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,7 +70,7 @@ function App() {
   }, []);
 
   const handleGameClose = () => {
-    setShowGames(false);
+    setShowGameSections(false);
     localStorage.setItem('showGames', 'false');
   };
 
@@ -80,9 +79,23 @@ function App() {
     localStorage.setItem('showEmergencyHelp', 'false');
   };
 
+  const handleStartPlaying = () => {
+    setShowGameSections(true);
+    setShowCommunity(false);
+  };
+
+  const handleCommunityClick = () => {
+    setShowCommunity(true);
+    setShowGameSections(false);
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? 'dark:bg-gray-900' : 'bg-gradient-to-br from-gray-50 to-gray-100'}`}>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Header 
+        darkMode={darkMode} 
+        setDarkMode={setDarkMode} 
+        onCommunityClick={handleCommunityClick}
+      />
 
       <main className="container mx-auto px-6 pt-24 pb-16">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
@@ -102,16 +115,18 @@ function App() {
             </p>
             
             {/* Start Playing Button */}
-            {!showGames && (
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setShowGames(true)}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
-              >
-                Start Playing Now
-              </motion.button>
-            )}
+            <div className="flex gap-4 justify-center">
+              {!showGameSections && (
+                <motion.button 
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleStartPlaying}
+                  className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+                >
+                  Start Playing Now
+                </motion.button>
+              )}
+            </div>
 
             {/* Stats Section */}
             <motion.div 
@@ -413,10 +428,7 @@ function App() {
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setShowGames(true);
-              localStorage.setItem('showGames', 'true');
-            }}
+            onClick={handleStartPlaying}
             className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
           >
             Start Your Adventure Now!
@@ -452,7 +464,7 @@ function App() {
       </div>
 
       {/* Game Section Modal with Close Button */}
-      {showGames && (
+      {showGameSections && (
         <>
           <motion.button
             initial={{ opacity: 0, scale: 0.5 }}
@@ -473,6 +485,51 @@ function App() {
           <EmergencyHelp darkMode={darkMode} onClose={handleEmergencyClose} />
         )}
       </AnimatePresence>
+
+      {/* Community Forum Modal */}
+      {showCommunity && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-md"
+        >
+          <div className="min-h-screen flex items-center justify-center p-4">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className={`w-full max-w-6xl rounded-xl shadow-2xl ${
+                darkMode ? 'bg-gray-800' : 'bg-white'
+              } p-8`}
+            >
+              <div className="flex justify-between items-center mb-6 border-b ${
+                darkMode ? 'border-gray-700' : 'border-gray-200'
+              } pb-4">
+                <h2 className={`text-3xl font-bold ${
+                  darkMode ? 'text-white' : 'text-gray-800'
+                }`}>
+                  Community Forum
+                </h2>
+                <button
+                  onClick={() => setShowCommunity(false)}
+                  className={`p-3 rounded-lg hover:bg-opacity-80 transition-colors ${
+                    darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
+                  }`}
+                >
+                  <FaTimes className={`text-2xl ${
+                    darkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`} />
+                </button>
+              </div>
+              <div className={`text-lg ${
+                darkMode ? 'text-gray-200' : 'text-gray-700'
+              }`}>
+                <CommunityForum darkMode={darkMode} onClose={() => setShowCommunity(false)} />
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
 
       <footer className={`border-t ${darkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'}`}>
         <div className="container mx-auto px-6 py-8">
