@@ -8,6 +8,7 @@ import MiniGame from './components/MiniGame';
 import CommunityForum from './components/CommunityForum';
 import Learn from './components/Learn';
 import { translations } from './translations';
+import FeedbackForm from './components/FeedbackForm';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -23,6 +24,7 @@ function App() {
   });
   const [showCommunity, setShowCommunity] = useState(false);
   const [showLearn, setShowLearn] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -645,6 +647,55 @@ function App() {
             </div>
           </motion.div>
         )}
+
+        {/* Add this before the footer */}
+        <section 
+          onClick={() => setShowFeedback(true)}
+          className={`w-full py-12 cursor-pointer transition-colors ${
+            darkMode 
+              ? 'bg-gray-800 hover:bg-gray-750' 
+              : 'bg-gray-50 hover:bg-gray-100'
+          }`}
+        >
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className={`text-3xl font-bold mb-4 ${
+                darkMode ? 'text-white' : 'text-gray-900'
+              }`}>
+                Share Your Feedback
+              </h2>
+              <p className={`text-lg mb-6 ${
+                darkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                We value your input! Help us improve by sharing your thoughts and experiences.
+              </p>
+              <div className={`inline-flex items-center gap-2 text-lg font-medium ${
+                darkMode ? 'text-blue-400' : 'text-blue-600'
+              }`}>
+                Click here to open feedback form 
+                <svg 
+                  className="w-5 h-5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <FeedbackForm 
+          isOpen={showFeedback} 
+          onClose={() => setShowFeedback(false)} 
+          darkMode={darkMode}
+        />
 
         <footer className={`border-t ${darkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'}`}>
           <div className="container mx-auto px-6 py-8">

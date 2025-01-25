@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { FaTrophy, FaStar, FaMedal, FaChartLine, FaUndo } from 'react-icons/fa';
 import confetti from 'canvas-confetti';
 import CourtroomSimulator from './CourtroomSimulator';
 import RightsMatchingGame from './MatchTheRights'; // Import the RightsMatchingGame component
+import { GameContext } from '../contexts/GameContext';
 
 const QUESTIONS_PER_TURN = 5;
 
@@ -207,6 +208,7 @@ const shuffleArray = (array) => {
 };
 
 const GameSection = ({ darkMode, onClose }) => {
+  const { score } = useContext(GameContext);
   const [selectedGame, setSelectedGame] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [points, setPoints] = useState(0);
@@ -236,7 +238,7 @@ const GameSection = ({ darkMode, onClose }) => {
   const [currentMode, setCurrentMode] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
+  const [gameScore, setGameScore] = useState(0); // Changed from score to gameScore
   const [showResult, setShowResult] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
@@ -1272,7 +1274,7 @@ const GameSection = ({ darkMode, onClose }) => {
     const isCorrect = selectedOption === currentQ.correct;
     
     if (isCorrect) {
-      setScore(score + 20); // 20 points per correct answer
+      setGameScore(prevScore => prevScore + 20); // Using gameScore instead of score
     }
     
     setShowExplanation(true);
