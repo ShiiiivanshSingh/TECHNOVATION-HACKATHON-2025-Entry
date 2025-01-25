@@ -98,10 +98,21 @@ function App() {
   };
 
   const handleComplete = (finalScore, toffeeEarned) => {
-    // Here you can update the user's toffee count in your game state
+    // Update the user's toffee count in local storage
+    const currentProgress = JSON.parse(localStorage.getItem('gameProgress')) || {};
+    const updatedProgress = {
+      ...currentProgress,
+      totalScore: (currentProgress.totalScore || 0) + finalScore,
+      toffeeCount: (currentProgress.toffeeCount || 0) + toffeeEarned,
+      gamesPlayed: (currentProgress.gamesPlayed || 0) + 1,
+    };
+    
+    // Save updated progress
+    localStorage.setItem('gameProgress', JSON.stringify(updatedProgress));
     console.log('Final Score:', finalScore, 'Toffee Earned:', toffeeEarned);
+    
     // Navigate to home page
-    window.location.href = '/';  
+    window.location.href = '/home';
   };
 
   return (
