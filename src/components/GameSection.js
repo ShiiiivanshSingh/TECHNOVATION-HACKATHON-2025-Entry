@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaTrophy, FaStar, FaMedal, FaChartLine, FaUndo } from 'react-icons/fa';
 import confetti from 'canvas-confetti';
+import CourtroomSimulator from './CourtroomSimulator';
 
 const GameSection = ({ darkMode, onClose }) => {
   const [selectedGame, setSelectedGame] = useState(null);
@@ -167,6 +168,13 @@ const GameSection = ({ darkMode, onClose }) => {
         // Add more questions here
       ],
       image: "https://images.unsplash.com/photo-1511629091441-ee46146481b6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      id: 4,
+      title: "Courtroom Simulator",
+      description: "Experience real legal cases and learn about justice through interactive courtroom scenarios.",
+      type: "courtroom",
+      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop"
     }
   ];
 
@@ -191,26 +199,31 @@ const GameSection = ({ darkMode, onClose }) => {
     return () => clearInterval(timer);
   }, [selectedGame, isQuizFinished, timeLeft]);
 
+  useEffect(() => {
+    console.log('Selected Game:', selectedGame);
+  }, [selectedGame]);
+
   const handleGameStart = (game) => {
-    console.log("Starting game:", game); // Debug log
+    console.log('Starting game with type:', game.type);
     setSelectedGame(game);
     
-    // Initialize game state
     if (game.type === 'quiz') {
       const shuffled = [...game.questions].sort(() => Math.random() - 0.5);
       setShuffledQuestions(shuffled);
     } else if (game.type === 'interactive') {
       const shuffled = [...game.scenarios].sort(() => Math.random() - 0.5);
       setShuffledQuestions(shuffled);
+    } else if (game.type === 'courtroom') {
+      // Reset states specific to courtroom
+      setIsQuizFinished(false);
+      setPoints(0);
+      setTimeLeft(0); // Disable timer for courtroom
     }
     
-    // Reset all game states
+    // Reset common game states
     setCurrentQuestionIndex(0);
-    setIsQuizFinished(false);
     setQuizAnswers({});
-    setPoints(0);
     setStreak(0);
-    setTimeLeft(30);
     setReward('');
   };
 
@@ -375,9 +388,20 @@ const GameSection = ({ darkMode, onClose }) => {
             ))}
           </div>
         ) : (
-          // Game Playing Screen
           <div className="max-w-4xl mx-auto">
-            {isQuizFinished ? (
+            {selectedGame.type === 'courtroom' ? (
+              <CourtroomSimulator 
+                darkMode={darkMode}
+                onComplete={(score) => {
+                  setPoints(score);
+                  setGameStats(prev => ({
+                    ...prev,
+                    gamesPlayed: prev.gamesPlayed + 1,
+                  }));
+                  setIsQuizFinished(true);
+                }}
+              />
+            ) : isQuizFinished ? (
               // Results Screen
               <div className={`p-8 rounded-xl shadow-lg text-center ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
                 <h2 className={`text-3xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'}`}>

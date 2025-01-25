@@ -6,6 +6,7 @@ import MiniGame from './components/MiniGame';
 import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe } from 'react-icons/fa';
 import { translations } from './translations';
 import CommunityForum from './components/CommunityForum';
+import CourtroomSimulator from './components/CourtroomSimulator';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -20,6 +21,7 @@ function App() {
     return saved ? JSON.parse(saved) : false;
   });
   const [showCommunity, setShowCommunity] = useState(false);
+  const [showCourtroom, setShowCourtroom] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,11 +84,24 @@ function App() {
   const handleStartPlaying = () => {
     setShowGameSections(true);
     setShowCommunity(false);
+    setShowCourtroom(false);
   };
 
   const handleCommunityClick = () => {
     setShowCommunity(true);
     setShowGameSections(false);
+  };
+
+  const handleClose = () => {
+    // Navigate to home page
+    window.location.href = '/';  
+  };
+
+  const handleComplete = (finalScore, toffeeEarned) => {
+    // Here you can update the user's toffee count in your game state
+    console.log('Final Score:', finalScore, 'Toffee Earned:', toffeeEarned);
+    // Navigate to home page
+    window.location.href = '/';  
   };
 
   return (
@@ -98,18 +113,19 @@ function App() {
       />
 
       <main className="container mx-auto px-6 pt-24 pb-16">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+        <div className="flex flex-col items-center justify-center text-center min-h-[80vh]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="max-w-4xl mx-auto w-full"
           >
             <span className="text-blue-600 text-xl font-semibold mb-4 block">Welcome to Legal Champs.</span>
-            <h1 className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'} flex flex-col gap-4`}>
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 ${darkMode ? 'text-white' : 'text-gray-800'} flex flex-col gap-4`}>
               Making Legal Rights
               <span className="text-blue-600">Fun & Easy</span>
             </h1>
-            <p className={`text-xl mb-8 max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-lg sm:text-xl mb-8 max-w-2xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               Join thousands of kids across India discovering their rights through exciting adventures, 
               games, and interactive stories. Start your journey to become a Legal Champion today!
             </p>
@@ -531,6 +547,14 @@ function App() {
         </motion.div>
       )}
 
+      {showCourtroom && (
+        <CourtroomSimulator 
+          onClose={handleClose}
+          onComplete={handleComplete}
+          darkMode={false}
+        />
+      )}
+
       <footer className={`border-t ${darkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'}`}>
         <div className="container mx-auto px-6 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -824,3 +848,4 @@ const AnimatedCounter = ({ value, duration = 1.5 }) => {
 };
 
 export default App;
+
