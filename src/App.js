@@ -7,7 +7,6 @@ import Header from './components/Header';
 import MiniGame from './components/MiniGame';
 import CommunityForum from './components/CommunityForum';
 import Learn from './components/Learn';
-import { translations } from './translations';
 import FeedbackForm from './components/FeedbackForm';
 import { GameProvider } from './contexts/GameContext';
 
@@ -171,6 +170,12 @@ function App() {
     window.location.href = '/home';
   };
 
+  // Update language change handler
+  const handleLanguageChange = (languageCode) => {
+    // Just update localStorage for language preference
+    localStorage.setItem('selectedLanguage', languageCode);
+  };
+
   return (
     <GameProvider>
       <Router>
@@ -180,6 +185,7 @@ function App() {
             setDarkMode={setDarkMode} 
             onCommunityClick={handleCommunityClick}
             onLearnClick={handleLearnClick}
+            onLanguageChange={handleLanguageChange}
           />
 
           <main className="container mx-auto px-6 pt-24 pb-16">

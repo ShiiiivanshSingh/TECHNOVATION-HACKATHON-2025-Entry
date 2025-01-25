@@ -5,9 +5,12 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
   const [isOpen, setIsOpen] = useState(false);
   const [ageDropdownOpen, setAgeDropdownOpen] = useState(false);
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
-  const [selectedAge, setSelectedAge] = useState(null);
-  const [selectedLanguage, setSelectedLanguage] = useState('English');
-  const [showPopup, setShowPopup] = useState(false);
+  const [selectedAge, setSelectedAge] = useState(() => {
+    return localStorage.getItem('selectedAge') || null;
+  });
+  const [selectedLanguage, setSelectedLanguage] = useState(() => {
+    return localStorage.getItem('selectedLanguage') || 'English';
+  });
 
   const menuVariants = {
     open: { opacity: 1, x: 0 },
@@ -16,14 +19,13 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
 
   const ageGroups = [
     '8-12',
-    '13-18',
-    '18-21'
+    '13-15',
+    '15-18'
   ];
 
   const languages = [
     { code: 'en', name: 'English' },
     { code: 'hi', name: 'हिंदी' },
-    { code: 'ta', name: 'தமிழ்' },
     { code: 'bn', name: 'বাংলা' }
   ];
 
@@ -37,17 +39,17 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
 
   const handleAgeSelect = (age) => {
     setSelectedAge(age);
+    localStorage.setItem('selectedAge', age);
     setAgeDropdownOpen(false);
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 2000); // Hide popup after 2 seconds
   };
 
   const handleLanguageSelect = (language) => {
-    setSelectedLanguage(language.name);
-    setLanguageDropdownOpen(false);
-    onLanguageChange(language.code);
-    setShowPopup(true);
-    setTimeout(() => setShowPopup(false), 2000);
+    if (onLanguageChange) {
+      setSelectedLanguage(language.name);
+      localStorage.setItem('selectedLanguage', language.name);
+      setLanguageDropdownOpen(false);
+      onLanguageChange(language.code);
+    }
   };
 
   return (
@@ -89,7 +91,7 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                     whileHover={{ scale: 1.1 }}
                     className={`hover:text-blue-600 transition-colors ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                   >
-                    Age Group ▼
+                    {selectedAge ? `Age: ${selectedAge}` : 'Select Age'} ▼
                   </motion.button>
                   <AnimatePresence>
                     {ageDropdownOpen && (
@@ -106,7 +108,9 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                             key={age}
                             onClick={() => handleAgeSelect(age)}
                             className={`block w-full text-left px-4 py-2 hover:bg-blue-600 hover:text-white ${
-                              darkMode ? 'text-gray-300' : 'text-gray-600'
+                              selectedAge === age 
+                                ? 'bg-blue-600 text-white' 
+                                : darkMode ? 'text-gray-300' : 'text-gray-600'
                             }`}
                           >
                             {age}
@@ -141,7 +145,9 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                             key={lang.code}
                             onClick={() => handleLanguageSelect(lang)}
                             className={`block w-full text-left px-4 py-2 hover:bg-blue-600 hover:text-white ${
-                              darkMode ? 'text-gray-300' : 'text-gray-600'
+                              selectedLanguage === lang.name 
+                                ? 'bg-blue-600 text-white' 
+                                : darkMode ? 'text-gray-300' : 'text-gray-600'
                             }`}
                           >
                             {lang.name}
@@ -204,7 +210,7 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                       onClick={() => setAgeDropdownOpen(!ageDropdownOpen)}
                       className={`text-lg ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
                     >
-                      Age Group
+                      {selectedAge ? `Age: ${selectedAge}` : 'Select Age'}
                     </button>
                     <AnimatePresence>
                       {ageDropdownOpen && (
@@ -219,7 +225,9 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                               key={age}
                               onClick={() => handleAgeSelect(age)}
                               className={`block w-full text-left py-1 ${
-                                darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                                selectedAge === age 
+                                  ? 'text-blue-600' 
+                                  : darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                               }`}
                             >
                               {age}
@@ -251,7 +259,9 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                               key={lang.code}
                               onClick={() => handleLanguageSelect(lang)}
                               className={`block w-full text-left py-1 ${
-                                darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+                                selectedLanguage === lang.name 
+                                  ? 'text-blue-600' 
+                                  : darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
                               }`}
                             >
                               {lang.name}
@@ -267,38 +277,6 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
           )}
         </AnimatePresence>
       </nav>
-
-      {/* Age Selection Popup */}
-      <AnimatePresence>
-        {showPopup && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className={`fixed top-24 right-8 px-6 py-3 rounded-lg shadow-lg z-[9999] ${
-              darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-            }`}
-          >
-            Selected Age Group: {selectedAge}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Popup for language selection */}
-      <AnimatePresence>
-        {showPopup && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className={`fixed top-24 right-8 px-6 py-3 rounded-lg shadow-lg z-[9999] ${
-              darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-            }`}
-          >
-            Language changed to: {selectedLanguage}
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

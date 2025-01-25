@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 import GameOver from './GameOver';
 
 const courtBg = '/assets/court/court-bg.jpg';
@@ -12,14 +13,16 @@ const convict2 = '/assets/court/convict2.png';
 
 const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
   const [currentCase, setCurrentCase] = useState(0);
+  const [dialogPhase, setDialogPhase] = useState('lawyer');
   const [showVerdict, setShowVerdict] = useState(false);
-  const [score, setScore] = useState(0);
-  const [showDialog, setShowDialog] = useState(true);
-  const [dialogPhase, setDialogPhase] = useState('lawyer'); // 'lawyer' or 'judge'
-  const [showGameOver, setShowGameOver] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [score, setScore] = useState(0);
+  const [showReturnToMenu, setShowReturnToMenu] = useState(false);
+  const [shuffledCases, setShuffledCases] = useState([]);
+  const [showGameOver, setShowGameOver] = useState(false);
+  const [showDialog, setShowDialog] = useState(true);
 
-  const cases = [
+  const originalCases = [
     {
       id: 1,
       title: "The Playground Incident",
@@ -122,8 +125,21 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
     }
   ];
 
+  useEffect(() => {
+    const shuffleArray = (array) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+
+    setShuffledCases(shuffleArray(originalCases));
+  }, []);
+
   const handleVerdict = (isGuilty) => {
-    const currentCaseData = cases[currentCase];
+    const currentCaseData = shuffledCases[currentCase];
     const correct = isGuilty === currentCaseData.guilty;
     setIsCorrect(correct);
 
@@ -143,10 +159,10 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
     if (dialogPhase === 'lawyer') {
       setDialogPhase('judge');
     } else {
-      if (currentCase < cases.length - 1) {
+      if (currentCase < shuffledCases.length - 1) {
         setCurrentCase(prev => prev + 1);
         setShowVerdict(false);
-        setShowDialog(true);
+        setShowReturnToMenu(false);
         setDialogPhase('lawyer');
       } else {
         handleComplete();
@@ -155,10 +171,8 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
   };
 
   const handleClose = () => {
-    // Just close the simulator
-    if (typeof onClose === 'function') {
-      onClose();
-    }
+    setShowDialog(false);
+    if (onClose) onClose();
   };
 
   const handleReturnToMenu = () => {
@@ -196,29 +210,30 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
           onClick={handleClose}
           className="absolute top-4 right-4 z-[60] bg-red-500 text-white p-2 rounded-full hover:bg-red-600 w-8 h-8 flex items-center justify-center font-bold"
         >
-          ✕
+          ×
         </motion.button>
 
         {/* Return to Menu button */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleReturnToMenu}
-          className="absolute top-4 right-4 z-[60] bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center gap-2"
-        >
-          <span>⬅</span> Menu
-        </motion.button>
-
+        {showReturnToMenu && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleReturnToMenu}
+            className="absolute top-4 right-4 z-[60] bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center gap-2"
+          >
+            <span>⬅</span> Menu
+          </motion.button>
+        )}
 
         {/* Game Over Screen */}
-        {currentCase >= cases.length && !showGameOver && (
+        {currentCase >= shuffledCases.length && !showGameOver && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 flex items-center justify-center bg-black/50 z-[55]"
           >
             <div className="bg-white p-8 rounded-xl shadow-2xl max-w-md text-center">
-              <h2 className="text-2xl font-bold mb-4">All Cases Complete!</h2>
+              <h2 className="text-2xl font-bold mb-4">All cases complete</h2>
               <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -235,7 +250,7 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
         {showGameOver && (
           <GameOver 
             score={score}
-            totalCases={cases.length}
+            totalCases={shuffledCases.length}
             onClose={handleReturnToMenu}
           />
         )}
@@ -283,12 +298,38 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
               className="absolute bottom-[5vh] right-[5%] transform translate-x-1/2"
             >
               <img 
-                src={cases[currentCase].convictImage}
+                src={shuffledCases[currentCase]?.convictImage}
                 alt="convict"
                 className="h-[65vh] object-contain"
               />
             </motion.div>
           </AnimatePresence>
+
+          {/* Dialog Box - Centered and Fancy */}
+          {showReturnToMenu && (
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="absolute bottom-8 left-20 transform -translate-x-1/2 w-[80%] max-w-4xl mx-auto bg-gradient-to-br from-white/55 to-white/45 p-8 rounded-2xl shadow-2xl border border-white/20 backdrop-blur-md"
+            >
+              <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+                All cases complete
+              </h3>
+              <p className="text-gray-800 text-lg mb-6 leading-relaxed">
+                Score: {score} / {shuffledCases.length}
+              </p>
+              <div className="mt-6 flex justify-center">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleReturnToMenu}
+                  className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-shadow"
+                >
+                  Return to Menu
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
 
           {/* Dialog Box - Centered and Fancy */}
           {showDialog && !showVerdict && (
@@ -300,10 +341,10 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
               {dialogPhase === 'lawyer' ? (
                 <>
                   <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    {cases[currentCase].title}
+                    {shuffledCases[currentCase]?.title}
                   </h3>
                   <p className="text-gray-800 text-lg mb-6 leading-relaxed">
-                    <span className="font-bold text-blue-600">Lawyer:</span> {cases[currentCase].lawyerDialog}
+                    <span className="font-bold text-blue-600">Lawyer:</span> {shuffledCases[currentCase]?.lawyerDialog}
                   </p>
                   <div className="flex justify-center">
                     <motion.button
@@ -322,7 +363,7 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
                     Judge's Statement
                   </h3>
                   <p className="text-gray-800 text-lg mb-6 leading-relaxed">
-                    <span className="font-bold text-purple-600">Judge:</span> {cases[currentCase].judgeDialog}
+                    <span className="font-bold text-purple-600">Judge:</span> {shuffledCases[currentCase]?.judgeDialog}
                   </p>
                   <div className="mt-6 flex justify-center gap-6">
                     <motion.button
@@ -330,7 +371,7 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
                       whileTap={{ scale: 0.95 }}
                       onClick={() => {
                         handleVerdict(true);
-                        setShowDialog(false);
+                        setShowReturnToMenu(false);
                       }}
                       className="px-8 py-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-shadow"
                     >
@@ -341,7 +382,7 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
                       whileTap={{ scale: 0.95 }}
                       onClick={() => {
                         handleVerdict(false);
-                        setShowDialog(false);
+                        setShowReturnToMenu(false);
                       }}
                       className="px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-shadow"
                     >
@@ -361,17 +402,17 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
               className="absolute bottom-8 left-20 transform -translate-x-1/2 w-[80%] max-w-4xl mx-auto bg-gradient-to-br from-white/55 to-white/45 p-8 rounded-2xl shadow-2xl border border-white/20 backdrop-blur-md"
             >
               <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                {isCorrect ? "Correct!" : "Incorrect"}
+                {isCorrect ? 'Correct!' : 'Incorrect'}
               </h3>
               <p className="text-gray-800 text-lg mb-4">
-                {cases[currentCase].explanation}
+                {shuffledCases[currentCase]?.explanation}
               </p>
               
               {/* Reference Links */}
               <div className="mt-4 space-y-2">
-                <p className="font-semibold text-gray-700">Learn More:</p>
+                <p className="font-semibold text-gray-700">Learn more:</p>
                 <div className="flex flex-wrap gap-3">
-                  {cases[currentCase].referenceLinks.map((link, index) => (
+                  {shuffledCases[currentCase]?.referenceLinks.map((link, index) => (
                     <a
                       key={index}
                       href={link.url}
@@ -395,7 +436,7 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
                   onClick={handleNext}
                   className="px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-shadow"
                 >
-                  Next Case
+                  {currentCase < shuffledCases.length - 1 ? 'Next Case' : 'Complete'}
                 </motion.button>
               </div>
             </motion.div>
