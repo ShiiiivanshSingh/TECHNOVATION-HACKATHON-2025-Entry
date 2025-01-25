@@ -188,7 +188,7 @@ function App() {
                     className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                   >
                     <div className="text-3xl font-bold text-blue-600">
-                      <AnimatedCounter value={10} duration={1} />k+
+                      <AnimatedCounter value={1} duration={1} />k+
                     </div>
                     <div>Active Learners</div>
                   </motion.div>
@@ -199,7 +199,7 @@ function App() {
                     className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                   >
                     <div className="text-3xl font-bold text-blue-600">
-                      <AnimatedCounter value={50} duration={1} />+
+                      <AnimatedCounter value={5} duration={1} />+
                     </div>
                     <div>Interactive Games</div>
                   </motion.div>
