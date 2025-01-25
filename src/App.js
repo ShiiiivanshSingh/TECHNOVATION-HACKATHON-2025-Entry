@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe } from 'react-icons/fa';
 import GameSection from './components/GameSection';
 import Header from './components/Header';
 import MiniGame from './components/MiniGame';
-import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe } from 'react-icons/fa';
-import { translations } from './translations';
 import CommunityForum from './components/CommunityForum';
 import Learn from './components/Learn';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { translations } from './translations';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -72,6 +72,126 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Chatbase initialization script
+    const initChatbase = () => {
+      if (!window.chatbase || window.chatbase("getState") !== "initialized") {
+        window.chatbase = (...args) => {
+          if (!window.chatbase.q) {
+            window.chatbase.q = [];
+          }
+          window.chatbase.q.push(args);
+        };
+        window.chatbase = new Proxy(window.chatbase, {
+          get(target, prop) {
+            if (prop === "q") {
+              return target.q;
+            }
+            return (...args) => target(prop, ...args);
+          }
+        });
+      }
+    };
+
+    // Load the Chatbase script
+    const loadChatbaseScript = () => {
+      const script = document.createElement("script");
+      script.src = "https://www.chatbase.co/embed.min.js";
+      script.id = "gcmQxoyUWU8k1Nl78Fz-F";
+      script.setAttribute("domain", "www.chatbase.co");
+      document.body.appendChild(script);
+    };
+
+    // Add close button to chatbot
+    const addCloseButton = () => {
+      // Remove any existing close buttons first
+      const existingButton = document.getElementById('chatbot-close-btn');
+      if (existingButton) {
+        existingButton.remove();
+      }
+
+      const checkForIframe = setInterval(() => {
+        const chatbotIframe = document.querySelector('iframe[src*="chatbase"]');
+        const chatbotBubble = document.querySelector('.chatbase-bubble');
+        
+        if (chatbotIframe) {
+          clearInterval(checkForIframe);
+          
+          const closeButton = document.createElement('button');
+          closeButton.innerHTML = '✕';
+          closeButton.id = 'chatbot-close-btn';
+          closeButton.className = 'fixed bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors';
+          closeButton.style.cssText = `
+            position: fixed;
+            right: 85px;
+            bottom: 20px;
+            z-index: 99999;
+            font-size: 16px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          `;
+          
+          const hideChatbot = () => {
+            const allChatbaseElements = document.querySelectorAll('[class*="chatbase"], [id*="chatbase"], iframe[src*="chatbase"]');
+            allChatbaseElements.forEach(element => {
+              element.style.display = 'none';
+              element.style.visibility = 'hidden';
+            });
+            closeButton.remove();
+          };
+          
+          closeButton.onclick = hideChatbot;
+          document.body.appendChild(closeButton);
+        }
+      }, 100); // Reduced check interval
+
+      // Clear interval after 5 seconds if iframe is not found
+      setTimeout(() => {
+        clearInterval(checkForIframe);
+      }, 5000);
+    };
+
+    // Initialize chatbot
+    const initializeChatbot = () => {
+      initChatbase();
+      loadChatbaseScript();
+      
+      // Add click listener to chatbot bubble for reopening
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.chatbase-bubble')) {
+          // Multiple attempts to add the close button
+          setTimeout(addCloseButton, 500);
+          setTimeout(addCloseButton, 1000);
+          setTimeout(addCloseButton, 1500);
+        }
+      });
+    };
+
+    // Initial setup
+    initializeChatbot();
+    setTimeout(addCloseButton, 2000);
+    setTimeout(addCloseButton, 2500);
+    setTimeout(addCloseButton, 3000);
+
+    return () => {
+      const script = document.getElementById("gcmQxoyUWU8k1Nl78Fz-F");
+      const closeButton = document.getElementById('chatbot-close-btn');
+      if (script) script.remove();
+      if (closeButton) closeButton.remove();
+      
+      document.removeEventListener('click', (e) => {
+        if (e.target.closest('.chatbase-bubble')) {
+          setTimeout(addCloseButton, 1000);
+        }
+      });
+    };
+  }, []);
+
   const handleGameClose = () => {
     setShowGameSections(false);
     localStorage.setItem('showGames', 'false');
@@ -130,11 +250,6 @@ function App() {
           onCommunityClick={handleCommunityClick}
           onLearnClick={handleLearnClick}
         />
-
-        {/* Debug indicator - can be removed in production */}
-        <div className="fixed top-0 right-0 m-4 text-white">
-          showLearn: {showLearn.toString()}
-        </div>
 
         <main className="container mx-auto px-6 pt-24 pb-16">
           <div className="flex flex-col items-center justify-center text-center min-h-[80vh]">
@@ -199,7 +314,7 @@ function App() {
                     className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                   >
                     <div className="text-3xl font-bold text-blue-600">
-                      <AnimatedCounter value={4} duration={1} />+
+                      <AnimatedCounter value={5} duration={2} />+
                     </div>
                     <div>Interactive Games</div>
                   </motion.div>

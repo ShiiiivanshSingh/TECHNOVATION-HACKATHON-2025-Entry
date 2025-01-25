@@ -1400,46 +1400,7 @@ const GameSection = ({ darkMode, onClose }) => {
               </div>
             ))}
 
-            {/* Placeholder Games */}
-            {[1, 2].map((placeholder) => (
-              <div
-                key={`placeholder-${placeholder}`}
-                className={`rounded-xl shadow-lg relative ${
-                  darkMode ? 'bg-gray-800/50' : 'bg-white/50'
-                }`}
-              >
-                <div className="h-[200px] bg-gray-200 rounded-t-xl">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className={`text-6xl ${darkMode ? 'text-gray-600' : 'text-gray-400'}`}>
-                      🎮
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className={`text-2xl font-bold mb-3 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                    Coming Soon
-                  </h3>
-                  <p className={`text-lg mb-4 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-                    {placeholder === 1 
-                      ? "New exciting game mode under development!"
-                      : "More challenges and adventures await!"}
-                  </p>
-                  <button
-                    disabled
-                    className={`w-full px-6 py-3 rounded-lg font-semibold text-white bg-gray-400 cursor-not-allowed`}
-                  >
-                    Coming Soon
-                  </button>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <span className={`px-3 py-1 rounded-full text-sm ${
-                    darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-200 text-gray-600'
-                  }`}>
-                    Under Development
-                  </span>
-                </div>
-              </div>
-            ))}
+           
           </div>
         ) : (
           <div className="max-w-4xl mx-auto">
