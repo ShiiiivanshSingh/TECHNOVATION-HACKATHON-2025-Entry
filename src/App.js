@@ -199,7 +199,7 @@ function App() {
                     className={`text-center ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                   >
                     <div className="text-3xl font-bold text-blue-600">
-                      <AnimatedCounter value={50} duration={1} />+
+                      <AnimatedCounter value={4} duration={1} />+
                     </div>
                     <div>Interactive Games</div>
                   </motion.div>
