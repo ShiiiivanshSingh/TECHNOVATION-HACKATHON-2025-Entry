@@ -23,11 +23,7 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
     '15-18'
   ];
 
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'hi', name: 'हिंदी' },
-    { code: 'bn', name: 'বাংলা' }
-  ];
+
 
   // Combined menu items with their click handlers
   const menuItems = [
@@ -120,45 +116,8 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                     )}
                   </AnimatePresence>
                 </div>
-
-                {/* Language Dropdown */}
-                <div className="relative">
-                  <motion.button
-                    onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
-                    whileHover={{ scale: 1.1 }}
-                    className={`hover:text-blue-600 transition-colors ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
-                  >
-                    {selectedLanguage} ▼
-                  </motion.button>
-                  <AnimatePresence>
-                    {languageDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className={`absolute top-full mt-2 py-2 w-32 rounded-lg shadow-lg ${
-                          darkMode ? 'bg-gray-800' : 'bg-white'
-                        }`}
-                      >
-                        {languages.map((lang) => (
-                          <button
-                            key={lang.code}
-                            onClick={() => handleLanguageSelect(lang)}
-                            className={`block w-full text-left px-4 py-2 hover:bg-blue-600 hover:text-white ${
-                              selectedLanguage === lang.name 
-                                ? 'bg-blue-600 text-white' 
-                                : darkMode ? 'text-gray-300' : 'text-gray-600'
-                            }`}
-                          >
-                            {lang.name}
-                          </button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
               </motion.div>
-              
+
               <motion.button
                 whileHover={{ scale: 1.1, rotate: 180 }}
                 whileTap={{ scale: 0.9 }}
@@ -238,39 +197,7 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick, onLangu
                     </AnimatePresence>
                   </div>
 
-                  {/* Language Dropdown for Mobile */}
-                  <div className="relative">
-                    <button
-                      onClick={() => setLanguageDropdownOpen(!languageDropdownOpen)}
-                      className={`text-lg ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                    >
-                      {selectedLanguage}
-                    </button>
-                    <AnimatePresence>
-                      {languageDropdownOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="ml-4 mt-2 space-y-2"
-                        >
-                          {languages.map((lang) => (
-                            <button
-                              key={lang.code}
-                              onClick={() => handleLanguageSelect(lang)}
-                              className={`block w-full text-left py-1 ${
-                                selectedLanguage === lang.name 
-                                  ? 'text-blue-600' 
-                                  : darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
-                              }`}
-                            >
-                              {lang.name}
-                            </button>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                 
                 </div>
               </div>
             </motion.div>
