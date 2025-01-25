@@ -208,7 +208,7 @@ const shuffleArray = (array) => {
 };
 
 const GameSection = ({ darkMode, onClose }) => {
-  const { score } = useContext(GameContext);
+  const { score, incrementScore } = useContext(GameContext);
   const [selectedGame, setSelectedGame] = useState(null);
   const [quizAnswers, setQuizAnswers] = useState({});
   const [points, setPoints] = useState(0);
@@ -247,6 +247,8 @@ const GameSection = ({ darkMode, onClose }) => {
   const [isExplanationVisible, setIsExplanationVisible] = useState(false);
   const [matchedRights, setMatchedRights] = useState([]);
   const [shuffledOptions, setShuffledOptions] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(null);
 
   const games = [
     {
@@ -1342,6 +1344,39 @@ const GameSection = ({ darkMode, onClose }) => {
     const timeBonus = Math.floor(timeLeft * 0.5); // 0.5 points per second left
     const streakBonus = streak * 2; // 2 points per streak
     return baseScore + timeBonus + streakBonus;
+  };
+
+  const handleAnswerClick = (answer) => {
+    setSelectedAnswer(answer);
+    const correct = answer === questions[currentQuestion].correctAnswer;
+    setIsCorrect(correct);
+    
+    if (correct) {
+      incrementScore(10); // Using context's incrementScore
+    }
+    
+    setShowExplanation(true);
+    
+    setTimeout(() => {
+      setShowExplanation(false);
+      setSelectedAnswer(null);
+      setIsCorrect(null);
+      
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(prev => prev + 1);
+      } else {
+        setShowResult(true);
+      }
+    }, 2000);
+  };
+
+  const resetGame = () => {
+    setCurrentQuestion(0);
+    setShowResult(false);
+    setGameStarted(false);
+    setShowExplanation(false);
+    setSelectedAnswer(null);
+    setIsCorrect(null);
   };
 
   return (
