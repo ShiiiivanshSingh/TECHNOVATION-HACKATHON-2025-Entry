@@ -88,7 +88,13 @@ const CommunityForum = ({ darkMode, onClose }) => {
           alt={message.username}
           className="w-12 h-12 rounded-full object-cover"
           onError={(e) => {
+            // Try the first fallback
             e.target.src = 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3BmLWljb240LWppcjIwNjItcG9yLWwtam9iNzg4LnBuZw.png';
+            // If that fails, use Unsplash as a second fallback
+            e.target.onerror = () => {
+              e.target.src = 'https://source.unsplash.com/random/100x100?portrait';
+              e.target.onerror = null; // Prevent infinite loop
+            };
           }}
         />
         <div className="flex-1">

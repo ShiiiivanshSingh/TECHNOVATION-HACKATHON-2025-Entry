@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Header = ({ darkMode, setDarkMode, onCommunityClick }) => {
+const Header = ({ darkMode, setDarkMode, onCommunityClick, onLearnClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuVariants = {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: "100%" }
   };
+
+  // Combined menu items with their click handlers
+  const menuItems = [
+    { name: 'Home', handler: undefined },
+    { name: 'Games', handler: undefined },
+    { name: 'Learn', handler: onLearnClick },
+    { name: 'Community', handler: onCommunityClick }
+  ];
 
   return (
     <nav className={`fixed w-full z-50 ${darkMode ? 'bg-gray-900/95' : 'bg-white/95'} backdrop-blur-sm`}>
@@ -25,18 +33,18 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick }) => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             <motion.div className="flex space-x-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              {['Home', 'Games', 'Learn', 'Community'].map((item, index) => (
+              {menuItems.map((item, index) => (
                 <motion.a
-                  key={item}
-                  onClick={item === 'Community' ? onCommunityClick : undefined}
-                  style={{ cursor: item === 'Community' ? 'pointer' : 'default' }}
+                  key={item.name}
+                  onClick={item.handler}
+                  style={{ cursor: item.handler ? 'pointer' : 'default' }}
                   whileHover={{ scale: 1.1 }}
                   className={`hover:text-blue-600 transition-colors ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  {item}
+                  {item.name}
                 </motion.a>
               ))}
             </motion.div>
@@ -76,14 +84,14 @@ const Header = ({ darkMode, setDarkMode, onCommunityClick }) => {
           >
             <div className="container mx-auto px-6 py-4">
               <div className="flex flex-col space-y-4">
-                {['Home', 'Games', 'Learn', 'Community'].map((item) => (
+                {menuItems.map((item) => (
                   <a
-                    key={item}
-                    onClick={item === 'Community' ? onCommunityClick : undefined}
-                    style={{ cursor: item === 'Community' ? 'pointer' : 'default' }}
+                    key={item.name}
+                    onClick={item.handler}
+                    style={{ cursor: item.handler ? 'pointer' : 'default' }}
                     className={`text-lg ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
                   >
-                    {item}
+                    {item.name}
                   </a>
                 ))}
               </div>

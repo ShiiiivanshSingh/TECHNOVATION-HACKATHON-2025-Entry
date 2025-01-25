@@ -6,7 +6,7 @@ const GAME_HEIGHT = 600;
 const BIRD_SIZE = 30;
 const PIPE_WIDTH = 60;
 const PIPE_GAP = 160;
-const GRAVITY = 0.20;
+const GRAVITY = 0.45;
 const JUMP_FORCE = -10;
 
 const MiniGame = ({ darkMode }) => {
@@ -51,7 +51,6 @@ const MiniGame = ({ darkMode }) => {
 
   const gameLoop = useCallback((timestamp) => {
     if (!lastTimeRef.current) lastTimeRef.current = timestamp;
-    // const _deltaTime = timestamp - lastTimeRef.current; // Marked as intentionally unused
     lastTimeRef.current = timestamp;
 
     setGameState(prev => {
@@ -61,37 +60,43 @@ const MiniGame = ({ darkMode }) => {
       const newVelocity = prev.velocity + GRAVITY;
       const newBirdY = prev.birdY + newVelocity;
 
-      // Check boundaries
+      // Check boundaries with improved collision detection
       if (newBirdY < 0 || newBirdY > GAME_HEIGHT - BIRD_SIZE) {
-        return { ...prev, gameOver: true };
+        return { ...prev, gameOver: true, isPlaying: false };
       }
 
-      // Update pipes
+      // Update pipes with slightly faster movement
       let newPipes = prev.pipes.map(pipe => ({
         ...pipe,
-        x: pipe.x - 3
+        x: pipe.x - 3.5 // Slightly increased speed for more challenge
       })).filter(pipe => pipe.x > -PIPE_WIDTH);
 
-      // Add new pipe
-      if (newPipes.length === 0 || newPipes[newPipes.length - 1].x < GAME_WIDTH - 300) {
+      // Add new pipe with improved spacing
+      if (newPipes.length === 0 || newPipes[newPipes.length - 1].x < GAME_WIDTH - 280) {
         newPipes.push(addPipe());
       }
 
-      // Check collisions and update score
+      // Check collisions and update score with improved hit detection
       let gameOver = false;
       let score = prev.score;
 
       newPipes = newPipes.map(pipe => {
-        // Score update
-        if (!pipe.passed && pipe.x < GAME_WIDTH / 2 - PIPE_WIDTH) {
+        // Score update with more precise passing point
+        if (!pipe.passed && pipe.x < GAME_WIDTH / 2 - PIPE_WIDTH / 2) {
           score += 1;
           return { ...pipe, passed: true };
         }
 
-        // Collision detection
-        if (Math.abs(pipe.x - GAME_WIDTH / 2) < BIRD_SIZE &&
-            (newBirdY < pipe.gapStart || newBirdY > pipe.gapStart + PIPE_GAP)) {
-          gameOver = true;
+        // Improved collision detection with better hitbox
+        const birdRight = GAME_WIDTH / 2 + BIRD_SIZE / 2;
+        const birdLeft = GAME_WIDTH / 2 - BIRD_SIZE / 2;
+        const pipeRight = pipe.x + PIPE_WIDTH;
+        const pipeLeft = pipe.x;
+
+        if (birdRight > pipeLeft && birdLeft < pipeRight) {
+          if (newBirdY < pipe.gapStart + 5 || newBirdY + BIRD_SIZE > pipe.gapStart + PIPE_GAP - 5) {
+            gameOver = true;
+          }
         }
 
         return pipe;
@@ -103,7 +108,8 @@ const MiniGame = ({ darkMode }) => {
         velocity: newVelocity,
         pipes: newPipes,
         score,
-        gameOver
+        gameOver,
+        isPlaying: !gameOver
       };
     });
 
