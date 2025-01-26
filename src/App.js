@@ -794,7 +794,7 @@ Mumbai, Maharashtra 400031</li>
                       </li>
                       <li>
                         <a 
-                          href="https://wcd.nic.in" 
+                          href="https://wcdhry.gov.in/child-welfare-committee/" 
                           target="_blank" 
                           rel="noopener noreferrer" 
                           className="hover:text-blue-600 flex items-center gap-1 transition-all duration-300 hover:scale-110"
@@ -926,7 +926,7 @@ const EmergencyHelp = ({ darkMode, onClose }) => {
                 <ResourceLink
                   title="Child Welfare Committee"
                   description="Find your local CWC"
-                  link="https://wcd.nic.in/"
+                  link="https://wcdhry.gov.in/child-welfare-committee/"
                   darkMode={darkMode}
                 />
               </div>
