@@ -926,7 +926,7 @@ const EmergencyHelp = ({ darkMode, onClose }) => {
                 <ResourceLink
                   title="Child Welfare Committee"
                   description="Find your local CWC"
-                  link="https://wcd.nic.in/child-welfare-committees"
+                  link="https://wcd.nic.in/"
                   darkMode={darkMode}
                 />
               </div>
