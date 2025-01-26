@@ -25,3 +25,8 @@ please view this build on larger screen like a desktop to avoid spacing issues.
 
 ### Flappy Bird Game
 ![Screenshot 2025-01-23 000505](https://github.com/user-attachments/assets/69da2eb7-0181-4368-9e93-93b3f9adff4a)
+
+### Login And SignUp Page
+![image](https://github.com/user-attachments/assets/cc2d919c-4e68-4e6f-b095-357dc4e17da9)
+![image](https://github.com/user-attachments/assets/c6ad26e0-307a-45ec-9c46-16dfdaa290e0)
+
