@@ -171,8 +171,20 @@ const CourtroomSimulator = ({ onClose, onComplete, darkMode = false }) => {
   };
 
   const handleClose = () => {
-    setShowDialog(false);
-    if (onClose) onClose();
+    if (score > 0) {
+      // If there's a score, show confirmation before closing
+      const confirmClose = window.confirm("Are you sure you want to exit? Your progress will be lost.");
+      if (confirmClose) {
+        if (onClose) onClose();
+        // Navigate to home page
+        window.location.href = '/';
+      }
+    } else {
+      // If no score, close directly
+      if (onClose) onClose();
+      // Navigate to home page
+      window.location.href = '/';
+    }
   };
 
   const handleReturnToMenu = () => {
