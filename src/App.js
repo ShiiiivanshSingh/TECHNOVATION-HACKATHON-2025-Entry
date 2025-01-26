@@ -186,6 +186,7 @@ function App() {
             onCommunityClick={handleCommunityClick}
             onLearnClick={handleLearnClick}
             onLanguageChange={handleLanguageChange}
+            onStartPlaying={handleStartPlaying}
           />
 
           <main className="container mx-auto px-6 pt-24 pb-16">
