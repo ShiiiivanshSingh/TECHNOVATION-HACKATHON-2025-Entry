@@ -9,6 +9,7 @@ import CommunityForum from './components/CommunityForum';
 import Learn from './components/Learn';
 import FeedbackForm from './components/FeedbackForm';
 import { GameProvider } from './contexts/GameContext';
+import CourtroomSimulator from './components/CourtroomSimulator';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -25,6 +26,7 @@ function App() {
   const [showCommunity, setShowCommunity] = useState(false);
   const [showLearn, setShowLearn] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -316,7 +318,12 @@ function App() {
                 {/* Game Modes */}
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className={`rounded-xl p-6 ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}
+                  onClick={() => {
+                    setShowGameSections(false);  // Hide game selection
+                    setShowCommunity(false);     // Hide community
+                    setSelectedGame('courtroom'); // Show courtroom simulator
+                  }}
+                  className={`rounded-xl p-6 ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg cursor-pointer`}
                 >
                   <img 
                     src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -333,7 +340,12 @@ function App() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className={`rounded-xl p-6 ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}
+                  onClick={() => {
+                    setShowGameSections(false);  // Hide game selection
+                    setShowCommunity(false);     // Hide community
+                    setSelectedGame('quiz');     // Show quiz game
+                  }}
+                  className={`rounded-xl p-6 ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg cursor-pointer`}
                 >
                   <img 
                     src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
@@ -350,7 +362,12 @@ function App() {
 
                 <motion.div
                   whileHover={{ scale: 1.05 }}
-                  className={`rounded-xl p-6 ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg`}
+                  onClick={() => {
+                    setShowGameSections(false);  // Hide game selection
+                    setShowCommunity(true);      // Show community forum
+                    setSelectedGame(null);       // Clear selected game
+                  }}
+                  className={`rounded-xl p-6 ${darkMode ? 'bg-gray-700' : 'bg-white'} shadow-lg cursor-pointer`}
                 >
                   <img 
                     src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
@@ -813,6 +830,21 @@ Mumbai, Maharashtra 400031</li>
           </footer>
 
           <MiniGame darkMode={darkMode} />
+
+          {selectedGame === 'courtroom' && (
+            <CourtroomSimulator 
+              darkMode={darkMode} 
+              onClose={() => setSelectedGame(null)}
+              onComplete={(score, toffeeEarned) => handleComplete(score, toffeeEarned)}
+            />
+          )}
+
+          {selectedGame === 'quiz' && (
+            <GameSection 
+              darkMode={darkMode} 
+              onClose={() => setSelectedGame(null)}
+            />
+          )}
         </div>
       </Router>
     </GameProvider>
