@@ -7,14 +7,20 @@
 <h2>🚀 Demo</h2>
 
 [LegalChamps.](https://legalchamps.vercel.app](https://legalchamps.vercel.app)) <br><br>
-[this build is not yet optimized for smaller screens. thank you!]
+please view this build on larger screen like a desktop to avoid spacing issues. 
 
 ### Landing Page
-![Screenshot 2025-01-23 000404](https://github.com/user-attachments/assets/ef66e6e7-b625-4d18-9be7-dec73b8e9437)
+![image](https://github.com/user-attachments/assets/c1b4064f-8da1-4162-92f0-e415f8c76b4b)
 
 
 ### More Features
-![Screenshot 2025-01-23 000439](https://github.com/user-attachments/assets/8fd992a9-d406-44ea-bd70-c1722132a537)
+![image](https://github.com/user-attachments/assets/e47da5f0-c07c-4035-a735-37f5c4067bf7)
+
+### 24/7 Chatbot
+![image](https://github.com/user-attachments/assets/b79683ff-d0b1-4aaa-985b-b928a91dea8c)
+
+### Emergency Help Button
+![image](https://github.com/user-attachments/assets/2c52455f-55fc-4325-90fc-09259040f059)
 
 
 ### Flappy Bird Game
