@@ -35,7 +35,7 @@ Here're some of the project's best features:
 ![image](https://github.com/user-attachments/assets/c1b4064f-8da1-4162-92f0-e415f8c76b4b)
 
 
-<h2 align="center">☁️ 24/7 Chatbot</h2>
+<h2 align="center"> 24/7 Chatbot</h2>
 
 ![image](https://github.com/user-attachments/assets/b79683ff-d0b1-4aaa-985b-b928a91dea8c)
 
@@ -44,14 +44,20 @@ Here're some of the project's best features:
 
 ![Screenshot 2025-01-23 000505](https://github.com/user-attachments/assets/69da2eb7-0181-4368-9e93-93b3f9adff4a)
 
-## License
+## 📺License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
 
 
-<h2>⚠️</h2>
+<h2>⚠️ Warning</h2>
 This website is meant for devices with larger displays only. Mobile users may face spacing and formatting issues
 
+<h2>❤️ Team Members</h2>
+*   Shivansh Pratap Singh
+*   Raghav Agrawal
+*   Roohani Sharma
 
+
+### Thanks for visiting!!!!
