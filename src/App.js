@@ -59,6 +59,10 @@ function App() {
       //   maxScale,
       //   minScale + (scrollPosition / maxScroll) * (maxScale - minScale)
       // );
+        //  Hello Fellow Stalker. There nothing here for you :). btw thx for checking my profile lol or you just stalking my hakathon project? cheeck out my other repos as well i guess then
+      // why it is not working :(
+
+      
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -70,6 +74,7 @@ function App() {
       const scrollPosition = window.scrollY;
       const maxScroll = 500;
       // const position = Math.max(0, Math.min(50, (scrollPosition / maxScroll) * 50));
+      
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -1012,7 +1017,7 @@ const AnimatedCounter = ({ value, duration = 1.5 }) => {
   useEffect(() => {
     let startTime;
     let animationFrame;
-    
+    //  Hello Fellow Stalker. There nothing here for you :). btw thx for checking my profile lol or you just stalking my hakathon project? cheeck out my other repos as well i guess then
     const animate = (timestamp) => {
       if (!startTime) startTime = timestamp;
       const progress = (timestamp - startTime) / (duration * 1000);
