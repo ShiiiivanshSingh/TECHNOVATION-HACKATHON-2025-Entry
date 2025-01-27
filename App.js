@@ -18,11 +18,11 @@ function App() {
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 mb-8 md:mb-0">
             <h1 className="text-5xl font-bold text-gray-800 mb-6">
-              Create Something
-              <span className="text-blue-600"> Amazing</span>
+              Hello Fellow Stalker. There nothing here for you :). btw thx for checking my profile lol or you just stalking my hakathon project? cheeck out my other repos as well i guess then
+              <span className="text-blue-600"> holaa</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Build beautiful and responsive websites with our modern tools and frameworks.
+              Team ID: SAP 1176
             </p>
             <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
               Get Started
@@ -48,7 +48,7 @@ function App() {
 
       <footer className="container mx-auto px-6 py-8">
         <div className="text-center text-gray-500">
-          © 2024 Your Company. All rights reserved.
+          sh1vansh
         </div>
       </footer>
     </div>
