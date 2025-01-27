@@ -4,7 +4,11 @@
 
 <p align="center"><img src="https://socialify.git.ci/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry/image?custom_description=Team+SAPP-1176&amp;description=1&amp;language=1&amp;name=1&amp;stargazers=1&amp;theme=Dark" alt="project-image"></p>
 
+<h2>❤️ Team Members</h2>
 
+*   Shivansh Pratap Singh
+*   Raghav Agrawal
+*   Roohani Sharma
 <h1 align="center">🚀 Demo:</h1>
 
 
@@ -26,6 +30,7 @@ Here're some of the project's best features:
 *   Age Group Support
 *   Emergency Resource Finder
 *   Rewards System
+
 
 
 
@@ -54,10 +59,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 <h2>⚠️ Warning</h2>
 This website is meant for devices with larger displays only. Mobile users may face spacing and formatting issues
 
-<h2>❤️ Team Members</h2>
-*   Shivansh Pratap Singh
-*   Raghav Agrawal
-*   Roohani Sharma
 
 
 ### Thanks for visiting!!!!
