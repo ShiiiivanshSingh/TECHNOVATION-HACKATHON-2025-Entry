@@ -749,6 +749,22 @@ Mumbai, Maharashtra 400031</li>
                 <div className="transform transition-transform duration-300 hover:scale-105">
                   <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Follow Us</h3>
                   <div className="flex space-x-6">
+
+
+     <a 
+                      href="https://github.com/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry" 
+                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaGithub className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                      <span>GitHub</span>
+                    </a>
+
+
+
+
+                    
                     <a 
                       href="https://x.com/de_mirage_fan" 
                       className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
@@ -767,15 +783,57 @@ Mumbai, Maharashtra 400031</li>
                       <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
                       <span>LinkedIn</span>
                     </a>
-                    <a 
-                      href="https://github.com/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry" 
+               
+
+
+
+
+
+
+<a 
+                      href="https://x.com/Raghavvv23" 
                       className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <FaGithub className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>GitHub</span>
+                      <FaTwitter className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                      <span>Twitter</span>
                     </a>
+                    <a 
+                      href="https://www.linkedin.com/in/raghav-agrawal-4431932ab/" 
+                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                      <span>LinkedIn</span>
+                    </a>
+                  
+
+<a 
+                      href="https://x.com/RoohaniS_25" 
+                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaTwitter className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                      <span>Twitter</span>
+                    </a>
+                    <a 
+                      href="https://www.linkedin.com/in/roohani-sharma-b16473322/" 
+                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
+                      <span>LinkedIn</span>
+                    </a>
+                  
+
+
+
+
+                        
                   </div>
                 </div>
               </div>
