@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe } from 'react-icons/fa';
+import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe, FaInstagram, FaFacebook } from 'react-icons/fa';
 import GameSection from './components/GameSection';
 import Header from './components/Header';
 import MiniGame from './components/MiniGame';
@@ -733,9 +733,19 @@ function App() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="transform transition-transform duration-300 hover:scale-105">
                   <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>About Us</h3>
-                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} transition-colors duration-300 hover:text-blue-500`}>
-                    Discover Your Rights Through Play! <br/> [TEAM ID:SAPP-1176]
+                  <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Discover Your Rights Through Play! <br /> [TEAM ID:SAPP-1176]
                   </p>
+                  {/* Official Repo Button */}
+                  <a 
+                    href="https://github.com/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={`mt-4 inline-flex items-center bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-300 hover:bg-blue-700 hover:scale-105`}
+                  >
+                    <FaGithub className="mr-2" />
+                    Official Repo
+                  </a>
                 </div>
                 <div className="transform transition-transform duration-300 hover:scale-105">
                   <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Contact</h3>
@@ -748,92 +758,71 @@ Mumbai, Maharashtra 400031</li>
                 </div>
                 <div className="transform transition-transform duration-300 hover:scale-105">
                   <h3 className={`text-lg font-semibold mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}>Follow Us</h3>
-                  <div className="flex space-x-6">
+                  <div className="flex flex-col space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <a 
+                        href="https://x.com/ShiiiivanshSingh" 
+                        className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-300 ${darkMode ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200'}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaTwitter className="text-2xl" />
+                        <span>Shivansh</span>
+                      </a>
+                      <a 
+                        href="https://www.linkedin.com/in/shivansh-pratap-singh-23b3b92b1" 
+                        className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-300 ${darkMode ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200'} ml-auto`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaLinkedin className="text-2xl" />
+                        <span>Shivansh</span>
+                      </a>
+                    </div>
 
+                    <div className="flex items-center space-x-2">
+                      <a 
+                        href="https://x.com/RoohaniS_25" 
+                        className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-300 ${darkMode ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200'}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaTwitter className="text-2xl" />
+                        <span>Roohani</span>
+                      </a>
 
-     <a 
-                      href="https://github.com/ShiiiivanshSingh/TECHNOVATION-HACKATHON-2025-Entry" 
-                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaGithub className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>GitHub</span>
-                    </a>
+                      <a 
+                        href="https://www.linkedin.com/in/roohani-sharma-b16473322/" 
+                        className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-300 ${darkMode ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200'} ml-auto`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaLinkedin className="text-2xl" />
+                        <span>Roohani</span>
+                      </a>
+                    </div>
 
-                        </br>
+                    <div className="flex items-center space-x-2">
+                      <a 
+                        href="https://x.com/Raghavvv23" 
+                        className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-300 ${darkMode ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200'}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaTwitter className="text-2xl" />
+                        <span>Raghav</span>
+                      </a>
 
-
-                    
-                    <a 
-                      href="https://x.com/de_mirage_fan" 
-                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaTwitter className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>Twitter</span>
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/in/shivansh-pratap-singh-23b3b92b1" 
-                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>LinkedIn</span>
-                    </a>
-               
-                        </br>
-
-
-
-
-
-<a 
-                      href="https://x.com/Raghavvv23" 
-                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaTwitter className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>Twitter</span>
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/in/raghav-agrawal-4431932ab/" 
-                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>LinkedIn</span>
-                    </a>
-                        </br>
-
-<a 
-                      href="https://x.com/RoohaniS_25" 
-                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaTwitter className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>Twitter</span>
-                    </a>
-                    <a 
-                      href="https://www.linkedin.com/in/roohani-sharma-b16473322/" 
-                      className={`${darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'} flex items-center gap-2 transition-all duration-300 hover:scale-110 hover:text-blue-500`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
-                      <span>LinkedIn</span>
-                    </a>
-                  
-                        </br>
-
-
-
-                        
+                      <a 
+                        href="https://www.linkedin.com/in/raghav-agrawal-4431932ab/" 
+                        className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-300 ${darkMode ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200'} ml-auto`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FaLinkedin className="text-2xl" />
+                        <span>Raghav</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1096,4 +1085,3 @@ const AnimatedCounter = ({ value, duration = 1.5 }) => {
 };
 
 export default App;
-
