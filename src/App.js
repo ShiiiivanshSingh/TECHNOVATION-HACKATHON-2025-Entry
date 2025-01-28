@@ -761,7 +761,7 @@ Mumbai, Maharashtra 400031</li>
                       <span>GitHub</span>
                     </a>
 
-
+<br>
 
 
                     
@@ -784,7 +784,7 @@ Mumbai, Maharashtra 400031</li>
                       <span>LinkedIn</span>
                     </a>
                
-
+<br>
 
 
 
@@ -808,7 +808,7 @@ Mumbai, Maharashtra 400031</li>
                       <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
                       <span>LinkedIn</span>
                     </a>
-                  
+                  <br>
 
 <a 
                       href="https://x.com/RoohaniS_25" 
@@ -829,7 +829,7 @@ Mumbai, Maharashtra 400031</li>
                       <span>LinkedIn</span>
                     </a>
                   
-
+<br>
 
 
 
