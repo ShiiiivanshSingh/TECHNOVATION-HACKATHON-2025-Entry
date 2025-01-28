@@ -19,6 +19,10 @@
 
 [![LegalChamps](https://img.shields.io/badge/Visit-LegalChamps-blue?style=for-the-badge)](https://legalchamps.vercel.app)
 
+[![LegalChamps](https://img.shields.io/badge/Demo-Video-blue?style=for-the-badge)](https://www.youtube.com/watch?v=_w3HJJnyhyg&feature=youtu.be)
+
+
+
 </div>
 
 <h2>✨ Features</h2>
