@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+Fgithuimport React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { FaPhone, FaExclamationTriangle, FaHeadset, FaHandsHelping, FaShieldAlt, FaTwitter, FaLinkedin, FaGithub, FaExternalLinkAlt, FaTimes, FaGlobe } from 'react-icons/fa';
@@ -761,7 +761,7 @@ Mumbai, Maharashtra 400031</li>
                       <span>GitHub</span>
                     </a>
 
-<br>
+                        </br>
 
 
                     
@@ -784,7 +784,7 @@ Mumbai, Maharashtra 400031</li>
                       <span>LinkedIn</span>
                     </a>
                
-<br>
+                        </br>
 
 
 
@@ -808,7 +808,7 @@ Mumbai, Maharashtra 400031</li>
                       <FaLinkedin className="text-xl transform transition-transform duration-300 group-hover:rotate-12" />
                       <span>LinkedIn</span>
                     </a>
-                  <br>
+                        </br>
 
 <a 
                       href="https://x.com/RoohaniS_25" 
@@ -829,7 +829,7 @@ Mumbai, Maharashtra 400031</li>
                       <span>LinkedIn</span>
                     </a>
                   
-<br>
+                        </br>
 
 
 
