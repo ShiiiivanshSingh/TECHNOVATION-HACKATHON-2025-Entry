@@ -761,7 +761,7 @@ Mumbai, Maharashtra 400031</li>
                   <div className="flex flex-col space-y-2">
                     <div className="flex items-center space-x-2">
                       <a 
-                        href="https://x.com/ShiiiivanshSingh" 
+                        href="https://x.com/de_mirage_fan" 
                         className={`flex items-center gap-2 p-2 rounded-lg transition-colors duration-300 ${darkMode ? 'text-gray-400 hover:bg-gray-800' : 'text-gray-600 hover:bg-gray-200'}`}
                         target="_blank"
                         rel="noopener noreferrer"
